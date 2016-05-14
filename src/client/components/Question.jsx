@@ -1,15 +1,28 @@
+import styles from './Question.scss';
 import React, { PropTypes } from 'react';
 import Choice from './Choice.jsx';
 
-function Question({ index, title, description, choices, value, active }) {
+function Question({ index, title, description, choices, value, onChange }) {
   return (
-    <div>
-      <h2>Question {index} {active ? '*' : ''}</h2>
-      <h1>{title}</h1>
-      <p>{description}</p>
+    <div className={styles.question}>
+      <div className={styles.number}>Question {index}</div>
+      <div className={styles.title}>{title}</div>
+      {description ? (
+        <div className={styles.description}>{description}</div>
+      ) : null}
 
-      <div>
-        {choices.map((choice, i) => <Choice key={i} label={choice.label} active={i === value} />)}
+
+      <div className={styles.choiceGrid}>
+        {choices.map((choice) => (
+          <div key={choice.value} className={styles.choiceItem}>
+            <Choice
+              label={choice.label}
+              value={choice.value}
+              active={choice.value === value}
+              onClick={() => onChange(choice.value)}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );

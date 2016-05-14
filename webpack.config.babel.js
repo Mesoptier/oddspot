@@ -9,6 +9,8 @@ const baseConfig = {
     filename: '[name].bundle.js',
   },
 
+  devtool: 'source-map',
+
   module: {
     loaders: [
       {
@@ -24,6 +26,14 @@ const baseConfig = {
           ],
         },
       },
+      {
+        test: /\.scss$/,
+        loaders: [
+          'style',
+          'css?modules&localIdentName=[name]--[local]--[hash:base64:5]',
+          'sass',
+        ],
+      }
     ],
   },
 };

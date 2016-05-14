@@ -1,3 +1,5 @@
+import './styles/base.scss';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -8,18 +10,32 @@ const initialState = {
   questions: {
     questions: [
       {
-        title: 'Title',
-        description: 'Description',
+        title: 'Are you male or female?',
         choices: [
-          { label: 'A' },
-          { label: 'B' },
-          { label: 'C' },
-          { label: 'D' },
+          { label: 'Male', value: 0 },
+          { label: 'Female', value: 1 },
         ],
-        value: 0, // default: null
+      },
+      {
+        title: 'Have you, during your leisure time and before the age of 65, frequently been exposed to sunlight?',
+        choices: [
+          { label: 'Yes', value: 0 },
+          { label: 'No', value: 1 },
+          { label: 'Don\'t know', value: 2 },
+        ],
+      },
+      {
+        title: 'Have you frequently been on a sun-vacation?',
+        description: '(to tan)',
+        choices: [
+          { label: 'Often', value: 0 },
+          { label: 'Regularly', value: 1 },
+          { label: 'Sometimes', value: 2 },
+          { label: 'Rarely', value: 3 },
+          { label: 'Never', value: 4 },
+        ],
       },
     ],
-    currentQuestion: 0, // default: null
   },
 };
 

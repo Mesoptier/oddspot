@@ -1,3 +1,4 @@
+import styles from './Choice.scss';
 import React, { PropTypes } from 'react';
 
 const propTypes = {
@@ -5,11 +6,11 @@ const propTypes = {
   active: PropTypes.bool,
 };
 
-function Choice({ label, active }) {
+function Choice({ label, value, active, onClick }) {
   return (
-    <div>
-      {label}
-      {active ? '*' : ''}
+    <div className={active ? styles.activeChoice : styles.choice} onClick={onClick}>
+      <div className={active ? styles.activeRadio : styles.radio}></div>
+      <div className={styles.label}>{label}</div>
     </div>
   );
 }

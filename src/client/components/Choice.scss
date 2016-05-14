@@ -1,0 +1,74 @@
+@import '../styles/variables.scss';
+
+.choice {
+  flex: 1 1 auto;
+  padding: 2 * $spacing-base 3 * $spacing-base;
+  flex-direction: row;
+  align-items: center;
+
+  font-size: 1.2rem;
+
+  background: $color-secondary;
+  border-radius: $border-radius-base;
+  cursor: pointer;
+
+  transition:
+    background 150ms ease,
+    color 150ms ease;
+
+  &:hover {
+    background: darken($color-secondary, 5%);
+  }
+  &:active {
+    background: darken($color-secondary, 10%);
+  }
+}
+
+.activeChoice {
+  composes: choice;
+
+  background: $color-primary;
+  color: $color-text-on-primary;
+
+  &:hover {
+    background: darken($color-primary, 5%);
+  }
+  &:active {
+    background: darken($color-primary, 10%);
+  }
+}
+
+.radio {
+  margin-left: -$spacing-base;
+  margin-right: 1.5 * $spacing-base;
+  width: 1.25em;
+  height: 1.25em;
+  justify-content: center;
+  align-items: center;
+
+  border: 0.1875em solid fade-out($color-text-default, 0.7);
+  border-radius: 50%;
+
+  &::before {
+    content: '';
+    width: 0.625em;
+    height: 0.625em;
+
+    border-radius: 50%;
+    background: fade-out($color-text-default, 0.7);
+    transform: scale(0, 0);
+
+    transition: transform 250ms ease, background 250ms ease;
+  }
+}
+
+.activeRadio {
+  composes: radio;
+
+  border-color: $color-text-on-primary;
+
+  &::before {
+    background: $color-text-on-primary;
+    transform: scale(1, 1);
+  }
+}

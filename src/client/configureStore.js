@@ -6,5 +6,7 @@ export default function configureStore(initialState) {
     questions,
   });
 
-  return createStore(reducer, initialState);
+  const enhancer = window.devToolsExtension ? window.devToolsExtension() : undefined;
+
+  return createStore(reducer, initialState, enhancer);
 }
