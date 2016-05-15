@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-  <title>Oddspot</title>
+  <title>{% block title %}Oddspot{% endblock %}</title>
 </head>
 <body>
-  <div id="root"></div>
-  <script src="<?= ASSETS_BASE ?>/client.bundle.js"></script>
+  {% block content %}{% endblock %}
+  {% block scripts %}{% endblock %}
 </body>
 </html>
