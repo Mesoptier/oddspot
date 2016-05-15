@@ -44,11 +44,13 @@ class QuestionList extends Component {
         {
           questions.map((question, i) => (
             <ScrollElement key={i} name={`question-${i}`} className={this.itemClassName(i)}>
-              <Question
-                {...question}
-                index={i + 1}
-                onChange={(value) => onChange({ question: i, value })}
-              />
+              <div className={styles.itemInner}>
+                <Question
+                  {...question}
+                  index={i + 1}
+                  onChange={(value) => onChange({ question: i, value })}
+                />
+              </div>
             </ScrollElement>
           ))
         }
