@@ -36,6 +36,7 @@ const initialState = {
         ],
       },
     ],
+    currentQuestion: 0,
   },
 };
 

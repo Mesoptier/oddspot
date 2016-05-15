@@ -4,15 +4,26 @@ import Question from './Question.jsx';
 
 const propTypes = {
   questions: PropTypes.array,
+  currentQuestion: PropTypes.number,
   onChange: PropTypes.func,
 };
 
-function QuestionList({ questions, onChange }) {
+function itemClassName(active, current) {
+  if (current) {
+    return styles.currentItem;
+  }
+  if (!active) {
+    return styles.hiddenItem;
+  }
+  return styles.item;
+}
+
+function QuestionList({ questions, currentQuestion, onChange }) {
   return (
     <div className={styles.list}>
       {
         questions.map((question, i) => (
-          <div key={i} className={styles.item}>
+          <div key={i} className={itemClassName(i <= currentQuestion, i == currentQuestion)}>
             <Question
               {...question}
               index={i + 1}

@@ -2,6 +2,18 @@ import styles from './Question.scss';
 import React, { PropTypes } from 'react';
 import Choice from './Choice.jsx';
 
+const propTypes = {
+  index: PropTypes.number,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  choices: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string,
+    value: PropTypes.number,
+  })),
+  value: PropTypes.number,
+  onChange: PropTypes.func,
+};
+
 function Question({ index, title, description, choices, value, onChange }) {
   return (
     <div className={styles.question}>
@@ -28,15 +40,6 @@ function Question({ index, title, description, choices, value, onChange }) {
   );
 }
 
-Question.propTypes = {
-  index: PropTypes.number,
-  title: PropTypes.string,
-  description: PropTypes.string,
-  choices: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.string,
-  })),
-  value: PropTypes.number,
-  active: PropTypes.bool,
-};
+Question.propTypes = propTypes;
 
 export default Question;

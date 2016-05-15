@@ -2,10 +2,10 @@ import { createAction, handleActions } from 'redux-actions';
 
 // Actions
 const SET_CURRENT_QUESTION = 'questionnaire/SET_CURRENT_QUESTION';
-const SET_VALUE = 'questionnaire/SET_VALUE';
+const ANSWER_QUESTION = 'questionnaire/ANSWER_QUESTION';
 
 export const setCurrentQuestion = createAction(SET_CURRENT_QUESTION);
-export const setValue = createAction(SET_VALUE);
+export const answerQuestion = createAction(ANSWER_QUESTION);
 
 // Initial state
 const initialState = {
@@ -21,7 +21,7 @@ export default handleActions({
     currentQuestion: payload,
   }),
 
-  [SET_VALUE]: (state, { payload }) => {
+  [ANSWER_QUESTION]: (state, { payload }) => {
     const { question, value } = payload;
     const questions = state.questions.slice();
 
@@ -30,9 +30,12 @@ export default handleActions({
       value,
     };
 
+    const currentQuestion = Math.max(state.currentQuestion, question + 1);
+
     return {
       ...state,
       questions,
+      currentQuestion,
     };
   },
 
