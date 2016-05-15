@@ -1,5 +1,6 @@
 import styles from './QuestionList.scss';
 import React, { Component, PropTypes } from 'react';
+import { Element as ScrollElement, scroller } from 'react-scroll';
 import Question from './Question.jsx';
 
 const propTypes = {
@@ -8,32 +9,53 @@ const propTypes = {
   onChange: PropTypes.func,
 };
 
-function itemClassName(active, current) {
-  if (current) {
-    return styles.currentItem;
-  }
-  if (!active) {
-    return styles.hiddenItem;
-  }
-  return styles.item;
-}
+class QuestionList extends Component {
 
-function QuestionList({ questions, currentQuestion, onChange }) {
-  return (
-    <div className={styles.list}>
-      {
-        questions.map((question, i) => (
-          <div key={i} className={itemClassName(i <= currentQuestion, i == currentQuestion)}>
-            <Question
-              {...question}
-              index={i + 1}
-              onChange={(value) => onChange({ question: i, value })}
-            />
-          </div>
-        ))
-      }
-    </div>
-  );
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.currentQuestion !== this.props.currentQuestion) {
+      console.log('scroll to', nextProps.currentQuestion);
+      scroller.scrollTo(`question-${nextProps.currentQuestion}`, {
+        duration: 600,
+        delay: 200,
+        smooth: true,
+      });
+    }
+  }
+
+  itemClassName(i) {
+    const { currentQuestion } = this.props;
+
+    if (i == currentQuestion) {
+      return styles.currentItem;
+    }
+
+    if (i > currentQuestion) {
+      return styles.hiddenItem;
+    }
+
+    return styles.item;
+  }
+
+  render() {
+    const { questions, onChange } = this.props;
+
+    return (
+      <div className={styles.list}>
+        {
+          questions.map((question, i) => (
+            <ScrollElement key={i} name={`question-${i}`} className={this.itemClassName(i)}>
+              <Question
+                {...question}
+                index={i + 1}
+                onChange={(value) => onChange({ question: i, value })}
+              />
+            </ScrollElement>
+          ))
+        }
+      </div>
+    );
+  }
+
 }
 
 QuestionList.propTypes = propTypes;

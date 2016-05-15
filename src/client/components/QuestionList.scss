@@ -12,7 +12,7 @@
 .item {
   padding: $spacing-base * 6 $spacing-base * 4;
 
-  border-bottom: 2px solid #eee;
+  border-bottom: 2px solid $color-secondary;
 
   transform: scale(1);
   transform-origin: 50% 0;

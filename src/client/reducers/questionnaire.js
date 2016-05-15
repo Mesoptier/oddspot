@@ -30,7 +30,8 @@ export default handleActions({
       value,
     };
 
-    const currentQuestion = Math.max(state.currentQuestion, question + 1);
+    const currentQuestion = Math.max(state.currentQuestion,
+      Math.min(questions.length - 1, question + 1));
 
     return {
       ...state,
