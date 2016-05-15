@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server --inline --hot --content-base public/assets/"
+    "start": "webpack-dev-server --host 0.0.0.0 --inline --hot --content-base public/assets/"
   },
   "dependencies": {
     "react": "^15.0.2",

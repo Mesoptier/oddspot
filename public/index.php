@@ -1,3 +1,3 @@
 <?php
 
-require_once('../src/server/index.php');
+require_once(__DIR__ . '/../src/server/index.php');
