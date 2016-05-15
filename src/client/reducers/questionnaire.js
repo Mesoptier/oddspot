@@ -1,8 +1,8 @@
 import { createAction, handleActions } from 'redux-actions';
 
 // Actions
-const SET_CURRENT_QUESTION = 'questions/SET_CURRENT_QUESTION';
-const SET_VALUE = 'questions/SET_VALUE';
+const SET_CURRENT_QUESTION = 'questionnaire/SET_CURRENT_QUESTION';
+const SET_VALUE = 'questionnaire/SET_VALUE';
 
 export const setCurrentQuestion = createAction(SET_CURRENT_QUESTION);
 export const setValue = createAction(SET_VALUE);

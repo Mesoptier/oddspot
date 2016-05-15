@@ -7,7 +7,7 @@ import configureStore from './configureStore';
 import ClientApp from './containers/ClientApp.jsx';
 
 const initialState = {
-  questions: {
+  questionnaire: {
     questions: [
       {
         title: 'Are you male or female?',

@@ -1,9 +1,9 @@
 import { createStore, combineReducers } from 'redux';
-import questions from './reducers/questions';
+import questionnaire from './reducers/questionnaire';
 
 export default function configureStore(initialState) {
   const reducer = combineReducers({
-    questions,
+    questionnaire,
   });
 
   const enhancer = window.devToolsExtension ? window.devToolsExtension() : undefined;

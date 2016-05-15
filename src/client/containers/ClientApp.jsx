@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { setCurrentQuestion, setValue as setQuestionValue } from '../reducers/questions';
+import { setCurrentQuestion, setValue as setQuestionValue } from '../reducers/questionnaire';
 import QuestionList from '../components/QuestionList.jsx';
 
-const mapStateToProps = ({ questions }) => ({
-  questions: questions.questions,
-  currentQuestion: questions.currentQuestion,
+const mapStateToProps = ({ questionnaire }) => ({
+  questions: questionnaire.questions,
+  currentQuestion: questionnaire.currentQuestion,
 });
 
 const mapDispatchToProps = {
@@ -26,7 +26,7 @@ class ClientApp extends Component {
     const { questions, currentQuestion, setQuestionValue } = this.props;
 
     return (
-      <QuestionList 
+      <QuestionList
         questions={questions}
         onChange={setQuestionValue}
       />
