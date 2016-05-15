@@ -1,6 +1,19 @@
 $spacing-base: 0.5rem;
 $border-radius-base: 3px;
 
+$breakpoints: (
+  // Extra small screen / phone
+  xs: 0,
+  // Small screen / phone
+  sm: 544px,
+  // Medium screen / tablet
+  md: 768px,
+  // Large screen / desktop
+  lg: 992px,
+  // Extra large screen / wide desktop
+  xl: 1200px
+);
+
 $color-background: #ffffff;
 $color-primary: #1098f7;
 $color-secondary: #eeeeee;

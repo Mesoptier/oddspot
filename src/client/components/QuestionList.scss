@@ -1,9 +1,21 @@
-.list {
+@import '../styles/mixins.scss';
+@import '../styles/variables.scss';
 
+.list {
+  align-self: center;
+  max-width: map-get($breakpoints, md);
 }
 
 .item {
-  padding: 3rem 2rem;
+  padding: $spacing-base * 6 $spacing-base * 4;
 
   border-bottom: 2px solid #eee;
+
+  @include media-breakpoint-down(sm) {
+    padding: $spacing-base * 4;
+  }
+
+  @include media-breakpoint-down(xs) {
+    padding: $spacing-base * 3;
+  }
 }

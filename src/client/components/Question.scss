@@ -1,24 +1,42 @@
+@import '../styles/mixins.scss';
 @import '../styles/variables.scss';
 
 .number {
   margin-bottom: 0.5 * $spacing-base;
 
-  font-size: 1.1rem;
+  font-size: 1.1em;
   color: $color-text-muted;
 }
 
 .title {
-  font-size: 1.9rem;
+  font-size: 1.9em;
+
+  @include media-breakpoint-down(sm) {
+    font-size: 1.5em;
+  }
+}
+
+.description {
+  margin-top: 0.5 * $spacing-base;
+
+  color: $color-text-muted;
 }
 
 .choiceGrid {
   margin: 2 * $spacing-base (-$spacing-base) (-$spacing-base);
-
-
   flex-direction: row;
   flex-wrap: wrap;
+
+  @include media-breakpoint-down(sm) {
+    margin: 1.5 * $spacing-base (-$spacing-base * 0.5) (-$spacing-base * 0.5);
+  }
 }
 
 .choiceItem {
   margin: $spacing-base;
+
+  @include media-breakpoint-down(sm) {
+    flex: 1 1 100%;
+    margin: $spacing-base * 0.5;
+  }
 }
