@@ -1,19 +1,26 @@
 <?php
-
 namespace OddSpot;
 
-// Get server environment (development | production)
+use OddSpot\Database\Database;
 use Slim\App;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Zeuxisoo\Whoops\Provider\Slim\WhoopsMiddleware;
 
+// Get server environment (development | production)
 define('SERVER_ENV', getenv('SERVER_ENV'));
 
 define('ROOT_DIRECTORY', __DIR__ . '/../..');
 define('DATA_DIRECTORY', ROOT_DIRECTORY . '/data');
 
-Database::init(DATA_DIRECTORY . '/database');
+Database::configure([
+  'driver' => 'pdo_sqlite',
+  'dbname' => 'oddspot',
+  'path' => DATA_DIRECTORY . '/database/database.sqlite',
+]);
+
+Database::migrate();
+Database::seed();
 
 // Configure server for different environments
 if (SERVER_ENV == 'production') {
@@ -74,7 +81,7 @@ $app->group('/admin', function () {
 // Client route
 $app->get('[/{path:.*}]', function (Request $request, Response $response) {
   $this->view->render($response, 'client.twig', [
-    'initialState' => Database::getClientInitialState(),
+    'initialState' => [],
   ]);
 });
 
