@@ -49,22 +49,22 @@ $container['view'] = function ($container) {
   return $view;
 };
 
-// Force trailing slash
-//$app->add(function (Request $request, Response $response, callable $next) {
-//  $uri = $request->getUri();
-//  $path = $uri->getPath();
-//  if ($path != '/' && substr($path, -1) == '/') {
-//    // Permanently redirect paths with a trailing slash
-//    // to their non-trailing counterpart
-//    $uri = $uri->withPath(substr($path, 0, -1));
-//    return $response->withRedirect((string)$uri, 301);
-//  }
-//
-//  return $next($request, $response);
-//});
-
 // Fancy error screen
 $app->add(new WhoopsMiddleware());
+
+// Remove trailing slash
+$app->add(function (Request $request, Response $response, callable $next) {
+  $uri = $request->getUri();
+  $path = $uri->getPath();
+  if ($path != '/' && substr($path, -1) == '/') {
+    // Permanently redirect paths with a trailing slash
+    // to their non-trailing counterpart
+    $uri = $uri->withPath(substr($path, 0, -1));
+    return $response->withRedirect((string)$uri, 301);
+  }
+
+  return $next($request, $response);
+});
 
 // Admin routes
 $app->group('/admin', function () {
