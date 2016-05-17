@@ -5,12 +5,13 @@ OddSpot
 Installation
 ------------
 
-Make sure that you have [Git](https://git-scm.com/), [Node.js](https://nodejs.org/) and [PHP (5.5+)](http://php.net/) installed. Then execute the following commands:
+Make sure that you have [Git](https://git-scm.com/), [Node.js](https://nodejs.org/), [Composer](http://getcomposer.org/) and [PHP (5.5+)](http://php.net/) installed. Then execute the following commands:
 
 ```shell
 > git clone git@github.com:Mesoptier/oddspot.git # Creates a new 'oddspot' directory containing the source files
 > cd oddspot # Enters the folder
-> npm install # Installs the requires packages, may take a while
+> composer install # Installs PHP dependencies
+> npm install # Installs JavaScript dependencies
 > npm install gulp-cli -g # Installs Gulp globally, so that you can run tasks more easily
 ```
 
