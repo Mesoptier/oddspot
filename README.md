@@ -5,22 +5,29 @@ OddSpot
 Installation
 ------------
 
-Make sure that you have [Git](https://git-scm.com/) and [Node.js](https://nodejs.org/) installed. Then execute the following commands:
+Make sure that you have [Git](https://git-scm.com/), [Node.js](https://nodejs.org/) and [PHP (5.5+)](http://php.net/) installed. Then execute the following commands:
 
 ```shell
 > git clone git@github.com:Mesoptier/oddspot.git # Creates a new 'oddspot' directory containing the source files
-> cd octopus-trivia # Enters the folder
+> cd oddspot # Enters the folder
 > npm install # Installs the requires packages, may take a while
+> npm install gulp-cli -g # Installs Gulp globally, so that you can run tasks more easily
 ```
 
-#### Starting PHP server
-Start the PHP server in `/public`.
-
-#### Starting assets server
-You can now start a server that will automatically compile the source files and makes them accessible on `http://localhost:8080`. This server will recompile the source files and reload the page when a change is made. The following command will start the server:
+#### PHP server
+The PHP server controls the backend of the app. You can start it using the following command:
 
 ```shell
-> npm start
+> gulp php-server
+```
+
+You can stop the server with `Ctrl + C`.
+
+#### Webpack Dev Server
+This server will recompile the source files and reload the page when a change is made. The following command will start the server:
+
+```shell
+> gulp webpack-dev-server
 ```
 
 You can stop the server with `Ctrl + C`.

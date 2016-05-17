@@ -11,6 +11,7 @@ export const answerQuestion = createAction(ANSWER_QUESTION);
 const initialState = {
   questions: [],
   currentQuestion: 0,
+  completed: false,
 };
 
 // Reducers
@@ -33,10 +34,13 @@ export default handleActions({
     const currentQuestion = Math.max(state.currentQuestion,
       Math.min(questions.length - 1, question + 1));
 
+    const completed = (question === questions.length - 1);
+
     return {
       ...state,
       questions,
       currentQuestion,
+      completed,
     };
   },
 

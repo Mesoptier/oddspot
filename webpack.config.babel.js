@@ -11,6 +11,8 @@ const baseConfig = {
 
   devtool: 'source-map',
 
+  plugins: [],
+
   module: {
     loaders: [
       {

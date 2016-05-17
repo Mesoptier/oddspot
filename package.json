@@ -2,9 +2,6 @@
   "name": "oddspot",
   "version": "0.0.0",
   "private": true,
-  "scripts": {
-    "start": "webpack-dev-server --host 0.0.0.0 --inline --hot --content-base public/assets/"
-  },
   "dependencies": {
     "react": "^15.0.2",
     "react-dom": "^15.0.2",
@@ -23,11 +20,15 @@
     "babel-preset-es2015-native-modules": "^6.6.0",
     "babel-preset-react": "^6.5.0",
     "css-loader": "^0.23.1",
+    "del": "^2.2.0",
     "eslint": "^2.9.0",
     "eslint-config-airbnb": "^8.0.0",
     "eslint-plugin-import": "^1.6.1",
     "eslint-plugin-jsx-a11y": "^1.0.4",
     "eslint-plugin-react": "^5.0.1",
+    "gulp": "^3.9.1",
+    "gulp-cli": "^1.2.1",
+    "gulp-util": "^3.0.7",
     "node-sass": "^3.7.0",
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.1",
