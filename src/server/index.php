@@ -1,34 +1,12 @@
 <?php
 namespace OddSpot;
 
-use OddSpot\Database\Database;
 use Slim\App;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Zeuxisoo\Whoops\Provider\Slim\WhoopsMiddleware;
 
-// Get server environment (development | production)
-define('SERVER_ENV', getenv('SERVER_ENV'));
-
-define('ROOT_DIRECTORY', __DIR__ . '/../..');
-define('DATA_DIRECTORY', ROOT_DIRECTORY . '/data');
-
-Database::configure([
-  'driver' => 'pdo_sqlite',
-  'dbname' => 'oddspot',
-  'path' => DATA_DIRECTORY . '/database/database.sqlite',
-]);
-
-Database::migrate();
-Database::seed();
-
-// Configure server for different environments
-if (SERVER_ENV == 'production') {
-  define('ASSETS_BASE', '/assets/build');
-} else {
-  $host = gethostbyname(gethostname());
-  define('ASSETS_BASE', 'http://' . $host . ':8080');
-}
+require_once(__DIR__ . '/config.php');
 
 // Initialize app
 $app = new App([

@@ -1,6 +1,7 @@
 <?php
 namespace OddSpot\Database;
 
+use Doctrine\DBAL\Connection;
 use OddSpot\Database\Entity\Question;
 use OddSpot\Database\Entity\QuestionChoice;
 use OddSpot\Database\Entity\Questionnaire;
@@ -12,14 +13,17 @@ use Spot\MapperInterface;
  */
 class Database {
 
-  /* @var MapperInterface */
-  protected static $questionnaireMapper;
+  /** @var Connection */
+  private static $connection;
 
   /* @var MapperInterface */
-  protected static $questionMapper;
+  public static $questionnaires;
 
   /* @var MapperInterface */
-  protected static $questionChoiceMapper;
+  public static $questions;
+
+  /* @var MapperInterface */
+  public static $question_choices;
 
   /**
    * @param $dsn string|array
@@ -28,25 +32,36 @@ class Database {
   public static function configure($dsn) {
     // Configure database
     $config = new \Spot\Config();
-    $config->addConnection('main', $dsn);
+    self::$connection = $config->addConnection('main', $dsn);
     $spot = new \Spot\Locator($config);
 
     // Get mappers
-    self::$questionnaireMapper = $spot->mapper(Questionnaire::class);
-    self::$questionMapper = $spot->mapper(Question::class);
-    self::$questionChoiceMapper = $spot->mapper(QuestionChoice::class);
+    self::$questionnaires = $spot->mapper(Questionnaire::class);
+    self::$questions = $spot->mapper(Question::class);
+    self::$question_choices = $spot->mapper(QuestionChoice::class);
   }
 
   public static function migrate() {
-    self::$questionnaireMapper->migrate();
-    self::$questionMapper->migrate();
-    self::$questionChoiceMapper->migrate();
+    self::$questionnaires->migrate();
+    self::$questions->migrate();
+    self::$question_choices->migrate();
   }
 
-  public static function seed() {
-//    $questionnaire = self::$questionnaireMapper->create([
-//      'name' => 'OddSpot',
-//    ]);
+  /**
+   * Removes the database.
+   */
+  public static function removeDatabase() {
+    self::$connection->close();
+    unlink(DATA_DIRECTORY . '/database/database.sqlite');
+  }
+
+  /**
+   * Rebuilds the database;
+   */
+  public static function rebuild() {
+    self::removeDatabase();
+    self::$connection->connect();
+    self::migrate();
   }
 
 }
