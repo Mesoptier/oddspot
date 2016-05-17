@@ -1,6 +1,7 @@
 <?php
 namespace OddSpot;
 
+use OddSpot\Database\Database;
 use Slim\App;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -59,7 +60,7 @@ $app->group('/admin', function () {
 // Client route
 $app->get('[/{path:.*}]', function (Request $request, Response $response) {
   $this->view->render($response, 'client.twig', [
-    'initialState' => [],
+    'initialData' => Database::getClientInitialData(),
   ]);
 });
 

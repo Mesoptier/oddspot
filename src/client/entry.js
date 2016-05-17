@@ -4,43 +4,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import configureStore from './configureStore';
+import { setQuestions } from './reducers/questionnaire';
 import ClientApp from './containers/ClientApp.jsx';
 
-const initialState = {
-  questionnaire: {
-    questions: [
-      {
-        title: 'Are you male or female?',
-        choices: [
-          { label: 'Male', value: 0 },
-          { label: 'Female', value: 1 },
-        ],
-      },
-      {
-        title: 'Have you, during your leisure time and before the age of 65, frequently been exposed to sunlight?',
-        choices: [
-          { label: 'Yes', value: 0 },
-          { label: 'No', value: 1 },
-          { label: 'Don\'t know', value: 2 },
-        ],
-      },
-      {
-        title: 'Have you frequently been on a sun-vacation?',
-        description: '(to tan)',
-        choices: [
-          { label: 'Often', value: 0 },
-          { label: 'Regularly', value: 1 },
-          { label: 'Sometimes', value: 2 },
-          { label: 'Rarely', value: 3 },
-          { label: 'Never', value: 4 },
-        ],
-      },
-    ],
-    currentQuestion: 0,
-  },
-};
+const store = configureStore();
 
-const store = configureStore(initialState);
+// Set initial data
+const initialData = window.INITIAL_DATA;
+store.dispatch(setQuestions(initialData.questionnaire.questions));
+
 const root = document.getElementById('root');
 
 ReactDOM.render((

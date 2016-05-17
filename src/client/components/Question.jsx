@@ -4,7 +4,7 @@ import Choice from './Choice.jsx';
 
 const propTypes = {
   index: PropTypes.number,
-  title: PropTypes.string,
+  question: PropTypes.string,
   description: PropTypes.string,
   choices: PropTypes.arrayOf(PropTypes.shape({
     label: PropTypes.string,
@@ -14,11 +14,11 @@ const propTypes = {
   onChange: PropTypes.func,
 };
 
-function Question({ index, title, description, choices, value, onChange }) {
+function Question({ index, question, description, choices, value, onChange }) {
   return (
     <div className={styles.question}>
       <div className={styles.number}>Question {index}</div>
-      <div className={styles.title}>{title}</div>
+      <div className={styles.title}>{question}</div>
       {description ? (
         <div className={styles.description}>{description}</div>
       ) : null}

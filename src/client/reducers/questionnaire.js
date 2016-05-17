@@ -1,9 +1,11 @@
 import { createAction, handleActions } from 'redux-actions';
 
 // Actions
+const SET_QUESTIONS = 'questionnaire/SET_QUESTIONS';
 const SET_CURRENT_QUESTION = 'questionnaire/SET_CURRENT_QUESTION';
 const ANSWER_QUESTION = 'questionnaire/ANSWER_QUESTION';
 
+export const setQuestions = createAction(SET_QUESTIONS);
 export const setCurrentQuestion = createAction(SET_CURRENT_QUESTION);
 export const answerQuestion = createAction(ANSWER_QUESTION);
 
@@ -16,6 +18,11 @@ const initialState = {
 
 // Reducers
 export default handleActions({
+
+  [SET_QUESTIONS]: (state, { payload }) => ({
+    ...state,
+    questions: payload,
+  }),
 
   [SET_CURRENT_QUESTION]: (state, { payload }) => ({
     ...state,

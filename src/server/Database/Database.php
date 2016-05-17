@@ -64,4 +64,34 @@ class Database {
     self::migrate();
   }
 
+  public static function getClientInitialData() {
+    $questionnaire = self::$questionnaires->all()
+      ->with(['questions'])
+      ->where(['id' => 1])
+      ->first();
+
+    $state = [
+      'questionnaire' => [
+        'questions' => [],
+      ],
+    ];
+
+    foreach ($questionnaire->questions as $i => $question) {
+      $state['questionnaire']['questions'][$i] = [
+        'question' => $question->question,
+        'description' => $question->description,
+        'choices' => [],
+      ];
+
+      foreach ($question->choices as $choice) {
+        $state['questionnaire']['questions'][$i]['choices'][] = [
+          'label' => $choice->label,
+          'value' => $choice->value,
+        ];
+      }
+    }
+
+    return $state;
+  }
+
 }

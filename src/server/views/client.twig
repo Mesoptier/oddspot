@@ -7,5 +7,6 @@
 {% endblock %}
 
 {% block scripts %}
+  <script>window.INITIAL_DATA = {{ initialData|json_encode()|raw }};</script>
   <script src="{{ assetsBase }}/client.bundle.js"></script>
 {% endblock %}
