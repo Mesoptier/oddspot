@@ -45,8 +45,11 @@ gulp.task('webpack-dev-server', (callback) => {
   const { port, host } = webpackDevServer;
   const url = `http://${host}:${port}/`;
 
-  webpackConfig.entry.client.push(`webpack/hot/dev-server?${url}`);
-  webpackConfig.entry.admin.push(`webpack/hot/dev-server?${url}`);
+  ['client', 'admin'].forEach((entry) => {
+    webpackConfig.entry[entry].push(`webpack-dev-server/client?${url}`);
+    webpackConfig.entry[entry].push('webpack/hot/only-dev-server');
+  });
+
   webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 
   console.log(webpackConfig);
