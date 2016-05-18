@@ -1,0 +1,52 @@
+@import '../styles/mixins.scss';
+@import '../styles/variables.scss';
+
+.button {
+  flex: 1 1 auto;
+  padding: 2 * $spacing-base 3 * $spacing-base;
+  flex-direction: row;
+  align-items: center;
+
+  font-size: 1.2rem;
+
+  border-radius: $border-radius-base;
+  cursor: pointer;
+
+  transition:
+    background 150ms ease,
+    color 150ms ease;
+
+  @include media-breakpoint-down(sm) {
+    padding: 1.5 * $spacing-base 2 * $spacing-base 1.5 * $spacing-base 1.5 * $spacing-base;
+    font-size: 1rem;
+  }
+}
+
+.defaultButton {
+  composes: button;
+
+  background: $color-secondary;
+
+  &:hover {
+    background: darken($color-secondary, 5%);
+  }
+
+  &:active {
+    background: darken($color-secondary, 10%);
+  }
+}
+
+.primaryButton {
+  composes: button;
+
+  color: $color-text-on-primary;
+  background: $color-primary;
+
+  &:hover {
+    background: darken($color-primary, 5%);
+  }
+
+  &:active {
+    background: darken($color-primary, 10%);
+  }
+}

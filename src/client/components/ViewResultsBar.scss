@@ -1,0 +1,37 @@
+@import '../styles/mixins.scss';
+@import '../styles/variables.scss';
+
+.bar {
+  flex: 1 1 auto;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  background: $color-background;
+  box-shadow: 0 -2px 0 $color-secondary;
+}
+
+.barInner {
+  flex: 0 1 map-get($breakpoints, md);
+  flex-direction: row;
+  align-items: center;
+  padding: 0 $spacing-base * 4;
+
+  @include media-breakpoint-down(sm) {
+    padding: $spacing-base * 4;
+  }
+
+  @include media-breakpoint-down(xs) {
+    padding: $spacing-base * 3;
+  }
+}
+
+.message {
+  flex: 1 1 auto;
+
+  font-size: 1.2rem;
+
+  @include media-breakpoint-down(sm) {
+    font-size: 1rem;
+  }
+}

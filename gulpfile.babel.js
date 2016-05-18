@@ -46,8 +46,8 @@ gulp.task('webpack-dev-server', (callback) => {
   const url = `http://${host}:${port}/`;
 
   ['client', 'admin'].forEach((entry) => {
-    webpackConfig.entry[entry].push(`webpack-dev-server/client?${url}`);
-    webpackConfig.entry[entry].push('webpack/hot/only-dev-server');
+    webpackConfig.entry[entry].unshift('webpack/hot/only-dev-server');
+    webpackConfig.entry[entry].unshift(`webpack-dev-server/client?${url}`);
   });
 
   webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
@@ -57,6 +57,7 @@ gulp.task('webpack-dev-server', (callback) => {
   const compiler = webpack(webpackConfig);
   new WebpackDevServer(compiler, {
     contentBase: 'public/assets/',
+    publicPath: url,
     hot: true,
 
     stats: { colors: true },

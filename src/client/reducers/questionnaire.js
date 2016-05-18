@@ -41,7 +41,7 @@ export default handleActions({
     const currentQuestion = Math.max(state.currentQuestion,
       Math.min(questions.length - 1, question + 1));
 
-    const completed = (question === questions.length - 1);
+    const completed = state.completed || (question === questions.length - 1);
 
     return {
       ...state,

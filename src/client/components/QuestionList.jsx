@@ -1,11 +1,12 @@
 import styles from './QuestionList.scss';
 import React, { Component, PropTypes } from 'react';
-import { Element as ScrollElement, scroller } from 'react-scroll';
+import { Element as ScrollElement, scroller, animateScroll } from 'react-scroll';
 import Question from './Question.jsx';
 
 const propTypes = {
   questions: PropTypes.array,
   currentQuestion: PropTypes.number,
+  completed: PropTypes.bool,
   onChange: PropTypes.func,
 };
 
@@ -13,12 +14,14 @@ class QuestionList extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.currentQuestion !== this.props.currentQuestion) {
-      console.log('scroll to', nextProps.currentQuestion);
       scroller.scrollTo(`question-${nextProps.currentQuestion}`, {
         duration: 600,
         delay: 200,
         smooth: true,
       });
+    }
+    if (nextProps.completed !== this.props.completed) {
+      animateScroll.scrollToBottom();
     }
   }
 
