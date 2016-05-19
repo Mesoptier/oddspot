@@ -1,13 +1,26 @@
 import styles from './QuestionList.scss';
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { Element as ScrollElement, scroller, animateScroll } from 'react-scroll';
-import Question from './Question.jsx';
+import { setCurrentQuestion, answerQuestion } from '../reducers/questionnaire';
+import Question from '../components/Question.jsx';
+
+const mapStateToProps = ({ questionnaire }) => ({
+  questions: questionnaire.questions,
+  currentQuestion: questionnaire.currentQuestion,
+  completed: questionnaire.completed,
+});
+
+const mapDispatchToProps = {
+  setCurrentQuestion,
+  answerQuestion,
+};
 
 const propTypes = {
   questions: PropTypes.array,
   currentQuestion: PropTypes.number,
   completed: PropTypes.bool,
-  onChange: PropTypes.func,
+  answerQuestion: PropTypes.func,
 };
 
 class QuestionList extends Component {
@@ -40,7 +53,7 @@ class QuestionList extends Component {
   }
 
   render() {
-    const { questions, onChange } = this.props;
+    const { questions, answerQuestion } = this.props;
 
     return (
       <div className={styles.list}>
@@ -51,7 +64,7 @@ class QuestionList extends Component {
                 <Question
                   {...question}
                   index={i + 1}
-                  onChange={(value) => onChange({ question: i, value })}
+                  onChange={(value) => answerQuestion({ question: i, value })}
                 />
               </div>
             </ScrollElement>
@@ -65,4 +78,4 @@ class QuestionList extends Component {
 
 QuestionList.propTypes = propTypes;
 
-export default QuestionList;
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionList);

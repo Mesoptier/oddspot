@@ -1,0 +1,24 @@
+@import '../styles/mixins.scss';
+@import '../styles/variables.scss';
+
+.results {
+  padding: $spacing-base * 3 $spacing-base * 3;
+  align-items: center;
+
+  @include media-breakpoint-down(sm) {
+    padding: $spacing-base * 4;
+  }
+
+  @include media-breakpoint-down(xs) {
+    padding: $spacing-base * 3;
+  }
+}
+
+.result {
+  max-width: map-get($breakpoints, md);
+  margin-bottom: $spacing-base * 3;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

@@ -10,7 +10,7 @@ import webpackConfig from './webpack.config.babel';
 const buildDir = `${__dirname}/public/assets/build`;
 
 const phpServer = {
-  port: 80,
+  port: 3000,
   host: '0.0.0.0',
 };
 

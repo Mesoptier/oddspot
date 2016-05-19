@@ -1,0 +1,36 @@
+@import '../styles/mixins.scss';
+@import '../styles/variables.scss';
+
+.box {
+
+}
+
+.heading {
+  flex-direction: row;
+  padding: $spacing-base * 2 $spacing-base * 2;
+
+  background: $color-primary;
+  border-radius: $border-radius-base $border-radius-base 0 0;
+  color: $color-text-on-primary;
+
+  @include media-breakpoint-down(xs) {
+    padding: $spacing-base * 1.5;
+  }
+}
+
+.name {
+  flex: 1 1 auto;
+}
+
+.description {
+  padding: $spacing-base * 2 $spacing-base * 2;
+
+  border: 2px solid $color-secondary;
+  border-top: none;
+  border-radius: 0 0 $border-radius-base $border-radius-base;
+  color: $color-text-default;
+
+  @include media-breakpoint-down(xs) {
+    padding: $spacing-base * 1.5;
+  }
+}
