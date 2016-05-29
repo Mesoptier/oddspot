@@ -1,6 +1,7 @@
 import styles from './Results.scss';
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import Container from '../components/Container.jsx';
 import ResultBox from '../components/ResultBox.jsx';
 
 const mapStateToProps = ({ questionnaire }) => ({
@@ -28,7 +29,7 @@ const propTypes = {
 
 function Results({ results }) {
   return (
-    <div className={styles.results}>
+    <Container>
       {
         Object.keys(results).map((key) => (
           <div key={key} className={styles.result}>
@@ -36,7 +37,7 @@ function Results({ results }) {
           </div>
         ))
       }
-    </div>
+    </Container>
   );
 }
 

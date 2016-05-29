@@ -2,20 +2,11 @@
 @import '../styles/variables.scss';
 
 .choice {
-  flex: 1 1 auto;
+  composes: button from 'sass!./Button.scss';
+
   padding: 2 * $spacing-base 3 * $spacing-base 2 * $spacing-base 2 * $spacing-base;
-  flex-direction: row;
-  align-items: center;
-
-  font-size: 1.2rem;
-
   background: $color-secondary;
-  border-radius: $border-radius-base;
-  cursor: pointer;
-
-  transition:
-    background 150ms ease,
-    color 150ms ease;
+  color: $color-text-on-secondary;
 
   &:hover {
     background: darken($color-secondary, 5%);
@@ -26,7 +17,6 @@
 
   @include media-breakpoint-down(sm) {
     padding: 1.5 * $spacing-base 2 * $spacing-base 1.5 * $spacing-base 1.5 * $spacing-base;
-    font-size: 1rem;
   }
 }
 
@@ -53,6 +43,7 @@
 
   border: 0.1875em solid fade-out($color-text-default, 0.7);
   border-radius: 50%;
+  font-size: 0.9231em;
 
   transition: border-color 150ms ease;
 

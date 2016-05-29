@@ -14,10 +14,11 @@ $breakpoints: (
   xl: 1200px
 );
 
-$color-background: #ffffff;
-$color-primary: #1098f7;
+$color-background: #FFFFFF;
+$color-primary: #347FDB;
 $color-secondary: transparentize(#dddddd, 0.5);
 
-$color-text-default: #222222;
-$color-text-muted: #808080;
+$color-text-default: #38434F;
+$color-text-muted: lighten($color-text-default, 30%);
 $color-text-on-primary: #ffffff;
+$color-text-on-secondary: transparentize($color-text-default, 0.15);

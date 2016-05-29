@@ -1,0 +1,20 @@
+@import '../styles/mixins';
+@import '../styles/variables';
+
+.container {
+  flex-direction: row;
+  justify-content: center;
+}
+
+.inner {
+  flex: 0 1 map-get($breakpoints, md);
+  padding: $spacing-base * 6 $spacing-base * 4;
+
+  @include media-breakpoint-down(sm) {
+    padding: $spacing-base * 4;
+  }
+
+  @include media-breakpoint-down(xs) {
+    padding: $spacing-base * 3;
+  }
+}

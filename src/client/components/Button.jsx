@@ -1,9 +1,9 @@
 import styles from './Button.scss';
 import React, { Component, PropTypes } from 'react';
+import classNames from 'classnames';
 
 const propTypes = {
   kind: PropTypes.string,
-  onClick: PropTypes.func,
   element: PropTypes.element,
 };
 
@@ -14,11 +14,16 @@ function buttonClassName(kind) {
   }
 }
 
-function Button({ kind, onClick, children, element, ...otherProps }) {
+function Button({ element, kind, center, children, ...otherProps }) {
   const Element = element;
 
+  const className = classNames(
+    buttonClassName(kind),
+    { [styles.center]: center }
+  );
+
   return (
-    <Element className={buttonClassName(kind)} onClick={onClick} {...otherProps}>
+    <Element className={className} {...otherProps}>
       {children}
     </Element>
   );
