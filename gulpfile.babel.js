@@ -83,5 +83,8 @@ gulp.task('php-server', (callback) => {
       process.stdout,
       process.stderr,
     ],
+    env: {
+      SERVER_ENV: 'development',
+    },
   });
 });

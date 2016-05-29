@@ -4,7 +4,7 @@ namespace OddSpot;
 use OddSpot\Database\Database;
 
 // Get server environment (development | production)
-define('SERVER_ENV', getenv('SERVER_ENV'));
+define('SERVER_ENV', getenv('SERVER_ENV') ?: 'production');
 
 define('ROOT_DIRECTORY', __DIR__ . '/../..');
 define('DATA_DIRECTORY', ROOT_DIRECTORY . '/data');
