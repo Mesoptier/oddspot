@@ -1,11 +1,13 @@
 import { createStore, combineReducers } from 'redux';
+import { routerReducer as routing } from 'react-router-redux';
+
 import questionnaire from './reducers/questionnaire';
-import router from './reducers/router';
+// import router from './reducers/router';
 
 export default function configureStore(initialState) {
   const reducer = combineReducers({
     questionnaire,
-    router,
+    routing,
   });
 
   const enhancer = window.devToolsExtension ? window.devToolsExtension() : undefined;

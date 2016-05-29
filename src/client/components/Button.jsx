@@ -4,6 +4,7 @@ import React, { Component, PropTypes } from 'react';
 const propTypes = {
   kind: PropTypes.string,
   onClick: PropTypes.func,
+  element: PropTypes.element,
 };
 
 function buttonClassName(kind) {
@@ -13,11 +14,13 @@ function buttonClassName(kind) {
   }
 }
 
-function Button({ kind, onClick, children }) {
+function Button({ kind, onClick, children, element, ...otherProps }) {
+  const Element = element;
+
   return (
-    <div className={buttonClassName(kind)} onClick={onClick}>
+    <Element className={buttonClassName(kind)} onClick={onClick} {...otherProps}>
       {children}
-    </div>
+    </Element>
   );
 }
 

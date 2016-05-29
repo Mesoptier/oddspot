@@ -1,12 +1,9 @@
 import styles from './ViewResultsBar.scss';
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 import Button from './Button.jsx';
 
-const propTypes = {
-  onClickNext: PropTypes.func,
-}
-
-function ViewResultsBar({ onClickNext }) {
+function ViewResultsBar() {
   return (
     <div className={styles.bar}>
       <div className={styles.barInner}>
@@ -14,7 +11,7 @@ function ViewResultsBar({ onClickNext }) {
           You have completed the questionnaire
         </div>
         <div className={styles.action}>
-          <Button kind="primary" onClick={onClickNext}>
+          <Button element={Link} to="results" kind="primary">
             View results
           </Button>
         </div>
@@ -22,7 +19,5 @@ function ViewResultsBar({ onClickNext }) {
     </div>
   );
 }
-
-ViewResultsBar.propTypes = propTypes;
 
 export default ViewResultsBar;
