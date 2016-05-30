@@ -14,7 +14,7 @@ function buttonClassName(kind) {
   }
 }
 
-function Button({ element, kind, center, children, ...otherProps }) {
+function Button({ element, kind, center, label, icon, ...otherProps }) {
   const Element = element;
 
   const className = classNames(
@@ -24,7 +24,8 @@ function Button({ element, kind, center, children, ...otherProps }) {
 
   return (
     <Element className={className} {...otherProps}>
-      {children}
+      <div className={styles.label}>{label}</div>
+      {icon ? <div className={styles.icon}>{icon}</div> : null}
     </Element>
   );
 }

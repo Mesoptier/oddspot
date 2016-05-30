@@ -4,6 +4,7 @@ import Container from '../components/Container.jsx';
 import Button from '../components/Button.jsx';
 import Logo from '../components/Logo.jsx';
 import Paragraph from '../components/Paragraph.jsx';
+import IconArrowRight from 'react-icons/lib/io/chevron-right';
 
 function Home() {
   return (
@@ -21,10 +22,10 @@ function Home() {
         to="/questionnaire"
         kind="primary"
         center
+        label="Start questionnaire"
+        icon={<IconArrowRight />}
         style={{ marginTop: '1rem'}}
-      >
-        Start questionnaire
-      </Button>
+      />
     </Container>
   )
 }
