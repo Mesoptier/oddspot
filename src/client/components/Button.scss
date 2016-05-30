@@ -12,11 +12,8 @@
   text-decoration: none;
 
   border-radius: $border-radius-base;
+  border-bottom: 2px solid;
   cursor: pointer;
-
-  transition:
-    background 150ms ease,
-    color 150ms ease;
 
   @include media-breakpoint-down(sm) {
     padding: 1.5 * $spacing-base 2 * $spacing-base;
@@ -27,14 +24,14 @@
 .defaultButton {
   composes: button;
 
-  background: $color-secondary;
+  color: $color-text-on-secondary;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+
+  border-bottom-color: darken($color-secondary, 10%);
+  background: linear-gradient(to bottom, $color-secondary, darken($color-secondary, 3%));
 
   &:hover {
-    background: darken($color-secondary, 5%);
-  }
-
-  &:active {
-    background: darken($color-secondary, 10%);
+    background: linear-gradient(to bottom, darken($color-secondary, 3%), darken($color-secondary, 6%));
   }
 }
 
@@ -42,14 +39,14 @@
   composes: button;
 
   color: $color-text-on-primary;
-  background: $color-primary;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+
+  border-bottom-color: darken($color-primary, 10%);
+  background: linear-gradient(to bottom, $color-primary, darken($color-primary, 3%));
+  //box-shadow: inset 0 2px 0 rgba(255,255,255,0.2);
 
   &:hover {
-    background: darken($color-primary, 5%);
-  }
-
-  &:active {
-    background: darken($color-primary, 10%);
+    background: linear-gradient(to bottom, darken($color-primary, 3%), darken($color-primary, 6%));
   }
 }
 
