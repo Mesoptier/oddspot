@@ -67,7 +67,7 @@ class QuestionList extends Component {
         />);
       }
       if (item.type === 'help') {
-        return (<div>{item.help}</div>);
+        return (<div className={styles.help}>{item.help}</div>);
       }
     })
 
