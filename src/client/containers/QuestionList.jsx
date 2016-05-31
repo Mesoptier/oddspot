@@ -8,6 +8,7 @@ import Question from '../components/Question.jsx';
 const mapStateToProps = ({ questionnaire }) => ({
   questions: questionnaire.questions,
   currentQuestion: questionnaire.currentQuestion,
+  answers: questionnaire.answers,
   completed: questionnaire.completed,
 });
 
@@ -19,6 +20,7 @@ const mapDispatchToProps = {
 const propTypes = {
   questions: PropTypes.array,
   currentQuestion: PropTypes.number,
+  answers: PropTypes.array,
   completed: PropTypes.bool,
   answerQuestion: PropTypes.func,
 };
@@ -53,19 +55,29 @@ class QuestionList extends Component {
   }
 
   render() {
-    const { questions, answerQuestion } = this.props;
+    const { questions, answers, answerQuestion } = this.props;
+
+    const items = questions.map((item, i) => {
+      if (item.type === 'question') {
+        return (<Question
+          {...item}
+          value={answers[item.questionIndex]}
+          index={item.questionIndex}
+          onChange={(value) => answerQuestion({ question: i, value })}
+        />);
+      }
+      if (item.type === 'help') {
+        return (<div>{item.help}</div>);
+      }
+    })
 
     return (
       <div className={styles.list}>
         {
-          questions.map((question, i) => (
+          items.map((item, i) => (
             <ScrollElement key={i} name={`question-${i}`} className={this.itemClassName(i)}>
               <div className={styles.itemInner}>
-                <Question
-                  {...question}
-                  index={i + 1}
-                  onChange={(value) => answerQuestion({ question: i, value })}
-                />
+                {item}
               </div>
             </ScrollElement>
           ))

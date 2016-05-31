@@ -12,6 +12,7 @@ export const answerQuestion = createAction(ANSWER_QUESTION);
 // Initial state
 const initialState = {
   questions: [],
+  answers: [],
   currentQuestion: 0,
   completed: false,
 };
@@ -31,21 +32,23 @@ export default handleActions({
 
   [ANSWER_QUESTION]: (state, { payload }) => {
     const { question, value } = payload;
-    const questions = state.questions.slice();
+    const answers = state.answers.slice();
 
-    questions[question] = {
-      ...questions[question],
-      value,
-    };
+    answers[state.questions[question].questionIndex] = value;
 
-    const currentQuestion = Math.max(state.currentQuestion,
-      Math.min(questions.length - 1, question + 1));
+    let currentQuestion = Math.max(state.currentQuestion,
+      Math.min(state.questions.length - 1, question + 1));
 
-    const completed = state.completed || (question === questions.length - 1);
+    while (currentQuestion < state.questions.length &&
+        state.questions[currentQuestion].type !== 'question') {
+      currentQuestion += 1;
+    }
+
+    const completed = state.completed || (question === state.questions.length - 1);
 
     return {
       ...state,
-      questions,
+      answers,
       currentQuestion,
       completed,
     };
