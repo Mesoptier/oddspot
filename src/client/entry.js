@@ -89,7 +89,7 @@ const initialData = {
       },
       {
         type: 'help',
-        help: 'Kies nu een plekje op je huid uit dat je wil diagnosticeren.'
+        help: 'Kies nu een plekje op uw huid uit dat u wilt diagnosticeren.'
       },
       {
         type: 'question',
@@ -163,7 +163,7 @@ const initialData = {
         type: 'question',
         questionIndex: 7,
         question: 'Wat voor een vorm heeft het plekje?',
-        description: 'De medische term voor plat is macula, deze plekjes kan je alleen zien en niet voelen met je vingers, je kunt zo ook niet zien van de zijkant. De medische term voor verhoogd of knobbeltje is papule,  deze plekjes kun je voelen als je ze aanraakt en je kunt ze ook zien van de zijkant.',
+        description: 'De medische term voor plat is macula, deze plekjes kan u alleen zien en niet voelen met uw vingers, u kunt zo ook niet zien van de zijkant. De medische term voor verhoogd of knobbeltje is papule, deze plekjes kunt u voelen als u ze aanraakt en u kunt ze ook zien van de zijkant.',
         choices: [
           {
             label: 'Plat',
@@ -235,7 +235,7 @@ const initialData = {
         type: 'question',
         questionIndex: 11,
         question: 'Zijn er kleine verwijde bloedvaten rond het plekje?',
-        description: 'Zie je rode kronkelinge lijntjes rond het plekje?',
+        description: 'Ziet u rode kronkelinge lijntjes rond het plekje?',
         choices: [
           {
             label: 'Ja',
@@ -251,7 +251,7 @@ const initialData = {
         type: 'question',
         questionIndex: 12,
         question: 'Is het plekje een wond?',
-        description: 'Is het plekje open? zie je verzwering op het plekje?',
+        description: 'Is het plekje open? Ziet u verzwering op het plekje?',
         choices: [
           {
             label: 'Ja',

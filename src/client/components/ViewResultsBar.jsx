@@ -9,14 +9,14 @@ function ViewResultsBar() {
     <div className={styles.bar}>
       <div className={styles.barInner}>
         <div className={styles.message}>
-          Done!
+          Klaar!
         </div>
         <div className={styles.action}>
           <Button
             element={Link}
             to="results"
             kind="primary"
-            label="View results"
+            label="Bekijk resultaten"
             icon={<IconArrowRight />}
           />
         </div>
