@@ -50,3 +50,8 @@
     transition: transform 200ms ease;
   }
 }
+
+.label {
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+}

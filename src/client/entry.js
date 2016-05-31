@@ -25,29 +25,16 @@ const initialData = {
     questions: [
       {
         type: 'question',
-        questionIndex: 0,
-        question: 'What age are you?',
-        questionType: 'number',
-        inputPlaceholder: 'Age',
-      },
-      {
-        type: 'question',
-        questionIndex: 0,
-        question: 'What age are you?',
-        questionType: 'number',
-      },
-      {
-        type: 'question',
         questionIndex: 1,
-        question: 'Are you male or female?',
+        question: 'Bent u een man of een vrouw?',
         description: null,
         choices: [
           {
-            label: 'Male',
+            label: 'Man',
             value: 0
           },
           {
-            label: 'Female',
+            label: 'Vrouw',
             value: 1
           }
         ]
@@ -55,19 +42,19 @@ const initialData = {
       {
         type: 'question',
         questionIndex: 2,
-        question: 'Have you, during your leisure time and before the age of 65, frequently been exposed to sunlight?',
+        question: 'Bent u in uw vrije tijd en voor de leeftijd van 65 vaak blootgesteld aan zonlicht?',
         description: null,
         choices: [
           {
-            label: 'Yes',
+            label: 'Ja',
             value: 0
           },
           {
-            label: 'No',
+            label: 'Nee',
             value: 1
           },
           {
-            label: 'Don\'t know',
+            label: 'Dit weet ik niet',
             value: 2
           }
         ]
@@ -75,51 +62,214 @@ const initialData = {
       {
         type: 'question',
         questionIndex: 3,
-        question: 'Have you frequently been on a sun-vacation?',
-        description: '(to tan)',
+        question: 'Bent u vaak op zonvakantie geweest om te zonnen?',
+        description: 'Denk niet te lang na over deze vraag, vul hem in op gevoel.',
         choices: [
           {
-            label: 'Often',
+            label: 'Vaak',
             value: 0
           },
           {
-            label: 'Regularly',
+            label: 'Regelmatig',
             value: 1
           },
           {
-            label: 'Sometimes',
+            label: 'Soms',
             value: 2
           },
           {
-            label: 'Rarely',
+            label: 'Zelden',
             value: 3
           },
           {
-            label: 'Never',
+            label: 'Nooit',
             value: 4
           }
         ]
       },
       {
         type: 'help',
-        help: 'Choose a spot on your skin which you would like to diagnose'
+        help: 'Kies nu een plekje op je huid uit dat je wil diagnosticeren.'
       },
       {
         type: 'question',
         questionIndex: 4,
-        question: 'Are you male or female?',
-        description: null,
+        question: 'Bloed de vlek?',
+        description: 'Bloeden zou zich voor kunnen doen als u uzelf afdroogt na het douchen?',
         choices: [
           {
-            label: 'Male',
+            label: 'Ja',
             value: 0
           },
           {
-            label: 'Female',
+            label: 'Soms',
+            value: 1
+          },
+          {
+            label: 'Nee',
+            value: 2
+          },
+          {
+            label: 'Dit weet ik niet',
+            value: 3
+          }
+        ]
+      },
+      {
+        type: 'question',
+        questionIndex: 5,
+        question: 'Zit het vlekje op een plek waar het direct zonlicht krijgt?',
+        description: 'De plekken waar we het over hebben zitten bijvoorbeeld op het gezicht, de oren, de onderarmen, de rug van uw hand of op de bovenkant van uw schedel.',
+        choices: [
+          {
+            label: 'Ja',
+            value: 0
+          },
+          {
+            label: 'Nee',
             value: 1
           }
         ]
       },
+      {
+        type: 'question',
+        questionIndex: 6,
+        question: 'Wat is de kleur van het plekje?',
+        description: null,
+        choices: [
+          {
+            label: 'Huidkleurig',
+            value: 0
+          },
+          {
+            label: 'Licht rood',
+            value: 1
+          },
+          {
+            label: 'Donker rood',
+            value: 2
+          },
+          {
+            label: 'Vel rood',
+            value: 3
+          },
+          {
+            label: 'Bruin',
+            value: 4
+          }
+        ]
+      },
+      {
+        type: 'question',
+        questionIndex: 7,
+        question: 'Wat voor een vorm heeft het plekje?',
+        description: 'De medische term voor plat is macula, deze plekjes kan je alleen zien en niet voelen met je vingers, je kunt zo ook niet zien van de zijkant. De medische term voor verhoogd of knobbeltje is papule,  deze plekjes kun je voelen als je ze aanraakt en je kunt ze ook zien van de zijkant.',
+        choices: [
+          {
+            label: 'Plat',
+            value: 0
+          },
+          {
+            label: 'Verhoogd',
+            value: 1
+          }
+        ]
+      },
+      {
+        type: 'question',
+        questionIndex: 8,
+        question: 'Hoe gehard is het plekje?',
+        description: null,
+        choices: [
+          {
+            label: 'Helemaal niet',
+            value: 0
+          },
+          {
+            label: 'Het voelt ruw',
+            value: 1
+          },
+          {
+            label: 'Het voelt ruw en ziet er ook ruw uit',
+            value: 2
+          },
+          {
+            label: 'Het is een ruwe, dikke geelachtige plek',
+            value: 3
+          }
+        ]
+      },
+      {
+        type: 'question',
+        questionIndex: 9,
+        question: 'Is er een verdikking onder de huid?',
+        description: 'De medische term hiervoor is subcutane verdikking.',
+        choices: [
+          {
+            label: 'Ja',
+            value: 0
+          },
+          {
+            label: 'Nee',
+            value: 1
+          }
+        ]
+      },
+      {
+        type: 'question',
+        questionIndex: 10,
+        question: 'Glimt het plekje?',
+        description: 'Lijkt het plekje te glimmen of glanzen?',
+        choices: [
+          {
+            label: 'Ja',
+            value: 0
+          },
+          {
+            label: 'Nee',
+            value: 1
+          }
+        ]
+      },
+      {
+        type: 'question',
+        questionIndex: 11,
+        question: 'Zijn er kleine verwijde bloedvaten rond het plekje?',
+        description: 'Zie je rode kronkelinge lijntjes rond het plekje?',
+        choices: [
+          {
+            label: 'Ja',
+            value: 0
+          },
+          {
+            label: 'Nee',
+            value: 1
+          }
+        ]
+      },
+      {
+        type: 'question',
+        questionIndex: 12,
+        question: 'Is het plekje een wond?',
+        description: 'Is het plekje open? zie je verzwering op het plekje?',
+        choices: [
+          {
+            label: 'Ja',
+            value: 0
+          },
+          {
+            label: 'Nee',
+            value: 1
+          }
+        ]
+      },
+      {
+        type: 'question',
+        questionIndex: 13,
+        question: 'Hoe oud bent u?',
+        questionType: 'number',
+        inputPlaceholder: 'Leeftijd',
+      }
     ]
   }
 };
