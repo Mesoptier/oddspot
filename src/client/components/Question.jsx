@@ -14,7 +14,47 @@ const propTypes = {
   onChange: PropTypes.func,
 };
 
-function Question({ index, question, description, choices, value, onChange }) {
+function renderInput(type, { choices, value, inputPlaceholder, onChange }) {
+  switch (type) {
+    case 'number':
+      return (
+        <input
+          className={styles.numberInput}
+          type="number"
+          min="0"
+          onKeyDown={(e) => {
+            if (e.keyCode === 13 || e.keyCode === 9) {
+              e.preventDefault();
+              e.target.blur();
+            }
+          }}
+          onBlur={(e) => onChange(e.target.value)}
+          autoFocus={true}
+          placeholder={inputPlaceholder}
+        />
+      );
+
+    default:
+      return (
+        <div className={styles.choiceGrid}>
+          {choices.map((choice) => (
+            <div key={choice.value} className={styles.choiceItem}>
+              <Choice
+                label={choice.label}
+                value={choice.value}
+                active={choice.value === value}
+                onClick={() => onChange(choice.value)}
+              />
+            </div>
+          ))}
+        </div>
+      );
+  }
+}
+
+function Question(props) {
+  const { index, question, questionType, description, choices, value, onChange } = props;
+
   return (
     <div className={styles.question}>
       <div className={styles.number}>Question {index}</div>
@@ -23,18 +63,8 @@ function Question({ index, question, description, choices, value, onChange }) {
         <div className={styles.description}>{description}</div>
       ) : null}
 
-
-      <div className={styles.choiceGrid}>
-        {choices.map((choice) => (
-          <div key={choice.value} className={styles.choiceItem}>
-            <Choice
-              label={choice.label}
-              value={choice.value}
-              active={choice.value === value}
-              onClick={() => onChange(choice.value)}
-            />
-          </div>
-        ))}
+      <div className={styles.inputContainer}>
+        {renderInput(questionType, props)}
       </div>
     </div>
   );

@@ -22,8 +22,12 @@
   color: $color-text-muted;
 }
 
+.inputContainer {
+  margin-top: 2 * $spacing-base
+}
+
 .choiceGrid {
-  margin: 2 * $spacing-base (-$spacing-base) (-$spacing-base);
+  margin: -$spacing-base;
   flex-direction: row;
   flex-wrap: wrap;
 
@@ -38,5 +42,24 @@
   @include media-breakpoint-down(sm) {
     flex: 1 1 100%;
     margin: $spacing-base * 0.5;
+  }
+}
+
+.numberInput {
+  padding: $spacing-base 1.5 * $spacing-base;
+  width: 100%;
+  box-sizing: border-box;
+
+  border: 2px solid $color-secondary;
+  border-radius: $border-radius-base;
+  font-size: 1.4rem;
+
+  &:focus {
+    outline: 0;
+    border-color: $color-primary;
+  }
+
+  &::placeholder {
+    color: $color-text-muted;
   }
 }

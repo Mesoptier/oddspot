@@ -25,6 +25,19 @@ const initialData = {
     questions: [
       {
         type: 'question',
+        questionIndex: 0,
+        question: 'What age are you?',
+        questionType: 'number',
+        inputPlaceholder: 'Age',
+      },
+      {
+        type: 'question',
+        questionIndex: 0,
+        question: 'What age are you?',
+        questionType: 'number',
+      },
+      {
+        type: 'question',
         questionIndex: 1,
         question: 'Are you male or female?',
         description: null,

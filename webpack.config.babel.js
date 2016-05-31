@@ -1,3 +1,5 @@
+import autoprefixer from 'autoprefixer';
+
 const baseConfig = {
   entry: {
     admin: [`${__dirname}/src/admin/entry.js`],
@@ -33,11 +35,14 @@ const baseConfig = {
         loaders: [
           'style',
           'css?modules&localIdentName=[name]--[local]--[hash:base64:5]',
+          'postcss',
           'sass',
         ],
       }
     ],
   },
+
+  postcss: () => [autoprefixer],
 };
 
 const productionConfig = {

@@ -55,7 +55,7 @@ class QuestionList extends Component {
   }
 
   render() {
-    const { questions, answers, answerQuestion } = this.props;
+    const { questions, currentQuestion, answers, answerQuestion } = this.props;
 
     const items = questions.map((item, i) => {
       if (item.type === 'question') {
@@ -77,7 +77,7 @@ class QuestionList extends Component {
           items.map((item, i) => (
             <ScrollElement key={i} name={`question-${i}`} className={this.itemClassName(i)}>
               <div className={styles.itemInner}>
-                {item}
+                {i <= currentQuestion ? item : null}
               </div>
             </ScrollElement>
           ))
