@@ -95,7 +95,7 @@ const initialData = {
         type: 'question',
         questionIndex: 4,
         question: 'Bloed de vlek?',
-        description: 'Bloeden zou zich voor kunnen doen als u uzelf afdroogt na het douchen?',
+        description: 'Bloeden zou zich voor kunnen doen als u uzelf afdroogt na het douchen.',
         choices: [
           {
             label: 'Ja',
