@@ -94,7 +94,7 @@ const initialData = {
       {
         type: 'question',
         questionIndex: 4,
-        question: 'Bloed de vlek?',
+        question: 'Bloed het plekje?',
         description: 'Bloeden zou zich voor kunnen doen als u uzelf afdroogt na het douchen.',
         choices: [
           {
@@ -118,7 +118,7 @@ const initialData = {
       {
         type: 'question',
         questionIndex: 5,
-        question: 'Zit het vlekje op een plek waar het direct zonlicht krijgt?',
+        question: 'Zit het plekje op een plek waar het direct zonlicht krijgt?',
         description: 'De plekken waar we het over hebben zitten bijvoorbeeld op het gezicht, de oren, de onderarmen, de rug van uw hand of op de bovenkant van uw schedel.',
         choices: [
           {
