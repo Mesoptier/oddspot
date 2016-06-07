@@ -50,6 +50,15 @@
   }
 }
 
+.helpItem {
+  composes: item;
+
+  background: $color-primary;
+  color: $color-text-on-primary;
+}
+
 .help {
+  padding: 1rem 0;
+  text-align: center;
   font-size: 1.2rem;
 }

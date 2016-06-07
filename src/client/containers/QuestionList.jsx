@@ -41,7 +41,7 @@ class QuestionList extends Component {
   }
 
   itemClassName(i) {
-    const { currentQuestion } = this.props;
+    const { currentQuestion, questions } = this.props;
 
     if (i == currentQuestion) {
       return styles.currentItem;
@@ -49,6 +49,10 @@ class QuestionList extends Component {
 
     if (i > currentQuestion) {
       return styles.hiddenItem;
+    }
+
+    if (questions[i].type === 'help') {
+      return styles.helpItem;
     }
 
     return styles.item;
