@@ -89,7 +89,7 @@ const initialData = {
       },
       {
         type: 'help',
-        help: 'Kies nu een plekje op uw huid uit dat u wilt diagnosticeren.'
+        help: 'Kies nu een plekje op uw huid uit dat\u00a0u\u00a0wilt\u00a0diagnosticeren.'
       },
       {
         type: 'question',
