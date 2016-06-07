@@ -53,11 +53,11 @@ function renderInput(type, { choices, value, inputPlaceholder, onChange }) {
 }
 
 function Question(props) {
-  const { index, question, questionType, description, choices, value, onChange } = props;
+  const { index, totalQuestions, question, questionType, description } = props;
 
   return (
     <div className={styles.question}>
-      <div className={styles.number}>Question {index}</div>
+      <div className={styles.number}>Vraag {index} uit {totalQuestions}</div>
       <div className={styles.title}>{question}</div>
       {description ? (
         <div className={styles.description}>{description}</div>

@@ -57,12 +57,16 @@ class QuestionList extends Component {
   render() {
     const { questions, currentQuestion, answers, answerQuestion } = this.props;
 
+    const totalQuestions = questions.reduce(
+      (total, item) => (item.type === 'question') ? total + 1 : total, 0);
+
     const items = questions.map((item, i) => {
       if (item.type === 'question') {
         return (<Question
           {...item}
           value={answers[item.questionIndex]}
           index={item.questionIndex}
+          totalQuestions={totalQuestions}
           onChange={(value) => answerQuestion({ question: i, value })}
         />);
       }
