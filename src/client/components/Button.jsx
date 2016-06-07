@@ -11,6 +11,7 @@ function buttonClassName(kind) {
   switch (kind) {
     case 'primary': return styles.primaryButton;
     case 'default': return styles.defaultButton;
+    case 'on-primary': return styles.onPrimaryButton;
   }
 }
 

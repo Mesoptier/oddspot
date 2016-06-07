@@ -18,11 +18,9 @@ function Questionnaire({ completed }) {
       <div className={styles.questionList}>
         <QuestionList />
       </div>
-      {completed ? (
-        <div className={styles.bottomBar}>
-          <ViewResultsBar />
-        </div>
-      ) : null}
+      <div className={completed ? styles.bottomBar : styles.bottomBarHidden}>
+        <ViewResultsBar />
+      </div>
     </div>
   );
 }

@@ -35,6 +35,16 @@
   composes: item;
 
   background: mix($color-background, $color-primary, 97%);
+
+  // Pushes item to full height
+  &::after {
+    content: '';
+    position: absolute;
+    min-height: 100vh;
+    width: 1px;
+    left: 0;
+    visibility: hidden;
+  }
 }
 
 .itemInner {

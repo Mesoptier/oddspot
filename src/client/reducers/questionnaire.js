@@ -53,12 +53,14 @@ export default handleActions({
     let currentQuestion = Math.max(state.currentQuestion,
       Math.min(state.questions.length - 1, question + 1));
 
-    while (currentQuestion < state.questions.length &&
+    while (currentQuestion < state.questions.length - 1 &&
         state.questions[currentQuestion].type !== 'question') {
       currentQuestion += 1;
     }
 
-    const completed = state.completed || (question === state.questions.length - 1);
+    const completed = state.completed
+      || (question === state.questions.length - 1)
+      || (currentQuestion === state.questions.length - 1 && state.questions[currentQuestion].type === 'help');
 
     return {
       ...state,

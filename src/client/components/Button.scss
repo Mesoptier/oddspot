@@ -47,6 +47,20 @@
   }
 }
 
+.onPrimaryButton {
+  composes: button;
+
+  color: $color-text-default;
+
+  border-bottom-color: darken(white, 13%);
+  background: linear-gradient(to bottom, white, darken(white, 5%));
+  box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+
+  &:hover {
+    background: linear-gradient(to bottom, darken(white, 5%), darken(white, 10%));
+  }
+}
+
 .center {
   align-self: center;
 }

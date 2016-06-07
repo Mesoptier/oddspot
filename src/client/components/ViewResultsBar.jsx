@@ -9,13 +9,14 @@ function ViewResultsBar() {
     <div className={styles.bar}>
       <div className={styles.barInner}>
         <div className={styles.message}>
-          Klaar!
+          U heeft alle vragen beantwoord.
+          Scroll terug als u uw antwoorden wil aanpassen.
         </div>
         <div className={styles.action}>
           <Button
             element={Link}
             to="results"
-            kind="primary"
+            kind="on-primary"
             label="Bekijk resultaten"
             icon={<IconArrowRight />}
           />

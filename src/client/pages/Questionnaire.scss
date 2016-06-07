@@ -1,11 +1,20 @@
-.questionList {
-  margin-bottom: 100px;
-}
+$barHeight: 200px;
 
 .bottomBar {
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 100px;
+  max-height: $barHeight;
+
+  transition:
+    opacity 250ms ease,
+    transform 400ms cubic-bezier(0.365, 1.530, 0.575, 1.000);
+}
+
+.bottomBarHidden {
+  composes: bottomBar;
+
+  transform: translate(0, 100%);
+  opacity: 0;
 }
