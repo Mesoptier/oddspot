@@ -1,8 +1,9 @@
+import styles from './ClientApp.scss';
 import React, { Component } from 'react';
 
 function ClientApp({ children }) {
   return (
-    <div>{children}</div>
+    <div className={styles.root}>{children}</div>
   );
 }
 

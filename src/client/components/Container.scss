@@ -18,3 +18,9 @@
     padding: $spacing-base * 3;
   }
 }
+
+.centeredContainer {
+  composes: container;
+  flex: 1 1 auto;
+  align-items: center;
+}

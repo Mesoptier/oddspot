@@ -8,14 +8,16 @@ import IconArrowRight from 'react-icons/lib/io/chevron-right';
 
 function Home() {
   return (
-    <Container>
+    <Container center>
       <Logo />
       <Paragraph justify>
-        This app evaluates a small spot on your skin for evidence of two potential precursors of
-        skin cancer: <em>Actinic Keratosis</em> and <em>Basal Cell Carcinoma</em>.
+        Deze website evalueert samen met u een klein plekje op uw huid voor aanwijzingen van twee potentiële voorbodes van huidkanker: <em>actinische keratose</em> en <em>basaalcelcarcinoom</em>.
       </Paragraph>
       <Paragraph justify>
-        Please note: <strong>when in doubt, consult your physician</strong>.
+        Let op: <strong>ga bij twijfel altijd naar uw arts</strong>.
+      </Paragraph>
+      <Paragraph justify>
+        Ontwikkeld door de Human-Technology Interaction group aan de Technische Universiteit Eindhoven.
       </Paragraph>
       <Button
         element={Link}
