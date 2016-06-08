@@ -42,8 +42,8 @@ const initialData = {
       {
         type: 'question',
         questionIndex: 2,
-        question: 'Bent u in uw vrije tijd en voor de leeftijd van 65 vaak blootgesteld aan zonlicht?',
-        description: null,
+        question: 'Zijn er periodes in uw leven geweest waarbij u langere tijd aaneengesloten in een gebied bent verbleven met veel zon?',
+        description: 'Bijvoorbeeld doordat u in de tropen of in een mediterraan land heeft gewoond.',
         choices: [
           {
             label: 'Ja',
@@ -62,8 +62,8 @@ const initialData = {
       {
         type: 'question',
         questionIndex: 3,
-        question: 'Bent u vaak op zonvakantie geweest om te zonnen?',
-        description: 'Denk niet te lang na over deze vraag, vul hem in op gevoel.',
+        question: 'Bent u vaak op zonvakantie geweest?',
+        description: 'Met het doel om te zonnen.',
         choices: [
           {
             label: 'Vaak',
@@ -94,8 +94,8 @@ const initialData = {
       {
         type: 'question',
         questionIndex: 4,
-        question: 'Bloed het plekje?',
-        description: 'Bloeden zou zich voor kunnen doen als u uzelf afdroogt na het douchen.',
+        question: 'Bloedt de plek?',
+        description: 'Bloeden zou zich voor kunnen doen als u uzelf afdroogt na het douchen?',
         choices: [
           {
             label: 'Ja',
@@ -178,7 +178,7 @@ const initialData = {
       {
         type: 'question',
         questionIndex: 8,
-        question: 'Hoe gehard is het plekje?',
+        question: 'Hoe ruw is het plekje?',
         description: null,
         choices: [
           {
