@@ -24,7 +24,7 @@ function Home() {
         to="/questionnaire"
         kind="primary"
         center
-        label="Begin vragenlijst"
+        label="Begin met vragenlijst"
         icon={<IconArrowRight />}
         style={{ marginTop: '1rem'}}
       />
