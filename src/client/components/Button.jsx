@@ -15,7 +15,7 @@ function buttonClassName(kind) {
   }
 }
 
-function Button({ element, kind, center, label, icon, ...otherProps }) {
+function Button({ element = 'div', kind = 'default', center, label, icon, ...otherProps }) {
   const Element = element;
 
   const className = classNames(

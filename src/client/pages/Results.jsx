@@ -3,6 +3,8 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Container from '../components/Container.jsx';
 import ResultBox from '../components/ResultBox.jsx';
+import Button from '../components/Button.jsx';
+import IconRefresh from 'react-icons/lib/io/refresh';
 
 const mapStateToProps = ({ questionnaire }) => ({
   // TODO: get this data from the store
@@ -37,6 +39,7 @@ function Results({ results }) {
           </div>
         ))
       }
+      <Button label="Start opnieuw" icon={<IconRefresh />} onClick={() => location.reload()} />
     </Container>
   );
 }
