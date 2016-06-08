@@ -11,7 +11,7 @@ function Home() {
     <Container center>
       <Logo />
       <Paragraph justify>
-        Deze website evalueert samen met u een klein plekje op uw huid voor aanwijzingen van twee potentiële voorbodes van huidkanker: <em>actinische keratose</em> en <em>basaalcelcarcinoom</em>.
+        Deze website evalueert samen met u een klein plekje op uw huid voor aanwijzingen van twee potentiële voorbodes van huidkanker: <strong>actinische keratose</strong> en <strong>basaalcelcarcinoom</strong>. Aan de hand van uw antwoorden berekent de app de kans dat het plekje AK of BCC is.
       </Paragraph>
       <Paragraph justify>
         Let op: <strong>ga bij twijfel altijd naar uw arts</strong>.
