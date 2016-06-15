@@ -17,7 +17,11 @@ Database::configure([
 
 // Configure server for different environments
 if (SERVER_ENV == 'production') {
-  define('ASSETS_BASE', '/assets/build');
+    if ($_SERVER['HTTP_HOST'] === 'chrissnijders.com') {
+        define('ASSETS_BASE', '/oddspot/assets/build');
+    } else {
+        define('ASSETS_BASE', '/assets/build');
+    }
 } else {
   $host = gethostbyname(gethostname());
   define('ASSETS_BASE', 'http://' . $host . ':8080');

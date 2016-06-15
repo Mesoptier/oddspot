@@ -1,3 +1,10 @@
 RewriteEngine on
 
-RewriteRule ^(.*)$ public/$1 [L]
+RewriteBase /oddspot/public/
+
+RewriteRule ^assets/(.*)$ assets/$1 [L]
+RewriteRule ^app index.php [L]
+
+RewriteCond %{REQUEST_FILENAME} !index.php
+RewriteCond %{REQUEST_FILENAME} !assets
+RewriteRule ^(.*)$ /oddspot/app/$1 [R=302]
