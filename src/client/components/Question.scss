@@ -23,7 +23,7 @@
 }
 
 .inputContainer {
-  margin-top: 2 * $spacing-base
+  margin-top: 2.5 * $spacing-base;
 }
 
 .choiceGrid {
@@ -37,10 +37,10 @@
 }
 
 .choiceItem {
-  margin: $spacing-base;
+  flex: 1 1 100%;
+  margin: $spacing-base * 0.5 $spacing-base;
 
   @include media-breakpoint-down(sm) {
-    flex: 1 1 100%;
     margin: $spacing-base * 0.5;
   }
 }
