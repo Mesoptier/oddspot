@@ -7,3 +7,9 @@
     margin-bottom: 0;
   }
 }
+
+.dummy {
+  margin-bottom: $spacing-base * 2;
+  text-align: center;
+  color: #bbb;
+}

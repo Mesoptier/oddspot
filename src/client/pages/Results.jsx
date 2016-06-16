@@ -11,16 +11,17 @@ const mapStateToProps = ({ questionnaire }) => ({
   results: {
     ak: {
       score: 0.5,
-      name: 'Basal Cell Carcinoma',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod ' +
-        'fringilla urna vitae sodales. Cras aliquet arcu non ultrices volutpat. Nullam nisi ' +
-        'tortor, condimentum id ex vel, iaculis maximus orci.',
+      name: 'Basaalcelcarcinoom',
+      description: 'Op een schaal van 0 tot 100, waarbij 0 betekent dat u niet in gevaar bent ' +
+        'voor basaal&shy;cel&shy;carcinoom, <strong>scoort u een 50</strong>. Vandaar dat op ' +
+        'dit punt het bewijs niet overtuigend is (noch sterk negatief, noch positief).',
     },
     bcc: {
       score: 0.1,
-      name: 'Actinic Keratosis',
-      description: 'Proin eros turpis, elementum quis vehicula vitae, commodo in libero. Aenean ' +
-        'et quam dolor. Nulla velit arcu, aliquam ultrices egestas nec, vulputate et libero.',
+      name: 'Actinische Keratose',
+      description: 'Op een schaal van 0 tot 100, waarbij 0 betekent dat u niet in gevaar bent ' +
+        'voor actinische keratose, <strong>scoort u een 10</strong>. Dat houdt in dat het ' +
+        'niet erg waarschijnlijk is dat u actinische keratose heeft.',
     },
   },
 });
@@ -32,12 +33,15 @@ const propTypes = {
 function Results({ results }) {
   return (
     <Container>
+      <div className={styles.dummy}>Maakt&nbsp;u&nbsp;zich&nbsp;geen&nbsp;zorgen, dit&nbsp;zijn&nbsp;slechts&nbsp;proef&nbsp;resultaten!</div>
       {
-        Object.keys(results).map((key) => (
-          <div key={key} className={styles.result}>
-            <ResultBox {...results[key]} />
-          </div>
-        ))
+        Object.keys(results)
+          .sort((key1, key2) => results[key2].score - results[key1].score)
+          .map((key) => (
+            <div key={key} className={styles.result}>
+              <ResultBox {...results[key]} />
+            </div>
+          ))
       }
       <Button label="Start opnieuw" icon={<IconRefresh />} onClick={() => location.reload()} />
     </Container>
