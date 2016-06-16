@@ -7,7 +7,6 @@ import { Router, IndexRoute, Route, createMemoryHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
 import configureStore from './configureStore';
-// import { setPage } from './reducers/router';
 import { setQuestions } from './reducers/questionnaire';
 
 import ClientApp from './containers/ClientApp.jsx';
@@ -94,8 +93,8 @@ const initialData = {
       {
         type: 'question',
         questionIndex: 4,
-        question: 'Bloedt de plek?',
-        description: 'Bloeden zou zich voor kunnen doen als u uzelf afdroogt na het douchen?',
+        question: 'Bloedt het plekje?',
+        description: 'Bloeden zou zich voor kunnen doen als u uzelf afdroogt na het douchen.',
         choices: [
           {
             label: 'Ja',
@@ -110,7 +109,7 @@ const initialData = {
             value: 2
           },
           {
-            label: 'Dit weet ik niet',
+            label: 'Weet ik niet',
             value: 3
           }
         ]
@@ -119,7 +118,7 @@ const initialData = {
         type: 'question',
         questionIndex: 5,
         question: 'Zit het plekje op een plek waar het direct zonlicht krijgt?',
-        description: 'De plekken waar we het over hebben zitten bijvoorbeeld op het gezicht, de oren, de onderarmen, de rug van uw hand of op de bovenkant van uw schedel.',
+        description: 'Bijvoorbeeld op uw gezicht, oren, onderarmen, handrug of op de bovenkant van uw hoofd.',
         choices: [
           {
             label: 'Ja',
@@ -150,7 +149,7 @@ const initialData = {
             value: 2
           },
           {
-            label: 'Vel rood',
+            label: 'Fel rood',
             value: 3
           },
           {
@@ -163,7 +162,7 @@ const initialData = {
         type: 'question',
         questionIndex: 7,
         question: 'Wat voor een vorm heeft het plekje?',
-        description: 'De medische term voor plat is macula, deze plekjes kan u alleen zien en niet voelen met uw vingers, u kunt zo ook niet zien van de zijkant. De medische term voor verhoogd of knobbeltje is papule, deze plekjes kunt u voelen als u ze aanraakt en u kunt ze ook zien van de zijkant.',
+        description: 'Platte plekjes kunt u alleen zien, niet voelen met uw vingers. Verhoogde plekjes kunt u voelen bij aanraking en ook vanaf de zijkant zien.',
         choices: [
           {
             label: 'Plat',
@@ -194,7 +193,7 @@ const initialData = {
             value: 2
           },
           {
-            label: 'Het is een ruwe, dikke geelachtige plek',
+            label: 'Het is een ruw, dik, geelachtig plekje',
             value: 3
           }
         ]
@@ -203,7 +202,7 @@ const initialData = {
         type: 'question',
         questionIndex: 9,
         question: 'Is er een verdikking onder de huid?',
-        description: 'De medische term hiervoor is subcutane verdikking.',
+        description: 'Bijvoordbeeld knobbeltjes of zwellingen, waarbij de huid zichtbaar naar boven/buiten gedrukt wordt.',
         choices: [
           {
             label: 'Ja',
@@ -218,8 +217,8 @@ const initialData = {
       {
         type: 'question',
         questionIndex: 10,
-        question: 'Glimt het plekje?',
-        description: 'Lijkt het plekje te glimmen of glanzen?',
+        question: 'Glimt of glanst het plekje?',
+        description: null,
         choices: [
           {
             label: 'Ja',
@@ -235,7 +234,7 @@ const initialData = {
         type: 'question',
         questionIndex: 11,
         question: 'Zijn er kleine verwijde bloedvaten rond het plekje?',
-        description: 'Ziet u rode kronkelinge lijntjes rond het plekje?',
+        description: 'Dit ziet u door de aanwezigheid van rode kronkelige lijntjes vlak onder de huid rondom het plekje.',
         choices: [
           {
             label: 'Ja',
@@ -251,7 +250,7 @@ const initialData = {
         type: 'question',
         questionIndex: 12,
         question: 'Is het plekje een wond?',
-        description: 'Is het plekje open? Ziet u verzwering op het plekje?',
+        description: 'Is het plekje bijvoorbeeld open of ziet u verzwering van de huid?',
         choices: [
           {
             label: 'Ja',
