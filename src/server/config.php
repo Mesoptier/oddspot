@@ -17,7 +17,7 @@ Database::configure([
 
 // Configure server for different environments
 if (SERVER_ENV == 'production') {
-    if (stripos($_SERVER['HTTP_HOST'], 'chrissnijders.com') !== false) {
+    if (isset($_SERVER['HTTP_HOST']) && stripos($_SERVER['HTTP_HOST'], 'chrissnijders.com') !== false) {
         define('ASSETS_BASE', '/oddspot/assets/build');
     } else {
         define('ASSETS_BASE', '/assets/build');
