@@ -3,7 +3,7 @@ namespace OddSpot\Database\Entity;
 
 use Spot\Entity;
 
-class Weights extends Entity {
+class Weight extends Entity {
 
   protected static $table = 'weights';
 

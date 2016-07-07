@@ -26,21 +26,21 @@ class DatabaseCommand extends Command {
   private function seed() {
     Database::rebuild();
 
-    $constants = Database::$weights->create([
+    $weight = Database::$weights->create([
       'ak' => -3.294,
       'bcc' => -13.16
     ]);
 
     $questionnaire = Database::$questionnaires->create([
       'name' => 'OddSpot',
-      'weights_id' => $constants->id,
+      'weight_id' => $weight->id,
     ]);
 
     $questions = [
       [
         'order' => 0,
         'type' => 'multiple choice',
-        'weights' => ['ak' => randomFloat(-3, 3), 'bcc' => randomFloat(-3, 3)],
+        'weight' => ['ak' => randomFloat(-3, 3), 'bcc' => randomFloat(-3, 3)],
         'question' => 'Are you male or female?',
         'choices' => [
           [ 'label' => 'Male', 'value' => 0 ],
@@ -50,7 +50,7 @@ class DatabaseCommand extends Command {
       [
         'order' => 1,
         'type' => 'multiple choice',
-        'weights' => ['ak' => randomFloat(-3, 3), 'bcc' => randomFloat(-3, 3)],
+        'weight' => ['ak' => randomFloat(-3, 3), 'bcc' => randomFloat(-3, 3)],
         'question' => 'Have you, during your leisure time and before the age of 65, frequently been exposed to sunlight?',
         'choices' => [
           [ 'label' => 'Yes', 'value' => 0 ],
@@ -61,7 +61,7 @@ class DatabaseCommand extends Command {
       [
         'order' => 2,
         'type' => 'multiple choice',
-        'weights' => ['ak' => randomFloat(-3, 3), 'bcc' => randomFloat(-3, 3)],
+        'weight' => ['ak' => randomFloat(-3, 3), 'bcc' => randomFloat(-3, 3)],
         'question' => 'Have you frequently been on a sun-vacation?',
         'description' => '(to tan)',
         'choices' => [
@@ -80,7 +80,7 @@ class DatabaseCommand extends Command {
       [
         'order' => 4,
         'type' => 'integer',
-        'weights' => ['ak' => randomFloat(-3, 3), 'bcc' => randomFloat(-3, 3)],
+        'weight' => ['ak' => randomFloat(-3, 3), 'bcc' => randomFloat(-3, 3)],
         'question' => 'What is your age?',
         'description' => 'description',
         'min' => 0,
@@ -90,18 +90,18 @@ class DatabaseCommand extends Command {
     ];
 
     foreach ($questions as $question) {
-      $weights = null;
+      $weight = null;
 
-      if (isset($question['weights'])) {
-        $weights = Database::$weights->create([
-          'ak' => $question['weights']['ak'],
-          'bcc' => $question['weights']['bcc'],
+      if (isset($question['weight'])) {
+        $weight = Database::$weights->create([
+          'ak' => $question['weight']['ak'],
+          'bcc' => $question['weight']['bcc'],
         ]);
       }
 
       $entity = Database::$questions->create([
         'questionnaire_id' => $questionnaire->id,
-        'weights_id' => ($weights !== null) ? $weights->id : 0,
+        'weight_id' => ($weight !== null) ? $weight->id : 0,
         'order' => $question['order'],
         'type' => $question['type'],
         'question' => isset($question['question']) ? $question['question'] : null,

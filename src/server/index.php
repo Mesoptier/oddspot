@@ -49,13 +49,19 @@ $app->add(function (Request $request, Response $response, callable $next) {
 $app->group('/admin', function () {
 
   // TODO: Add authentication
-  $this->get('/api', function (Request $request, Response $response) {
+
+  $this->get('/api/questionnaire', function (Request $request, Response $response) {
     return $response->withJson(Database::getAdminData());
+  });
+
+  $this->post('/api/questionnaire/save', function (Request $request, Response $response) {
+    $data = $request->getParsedBody();
+    return $response->withJson(Database::saveAdminData($data['changes']));
   });
 
   $this->get('[/{path:.*}]', function (Request $request, Response $response) {
     $this->view->render($response, 'admin.twig', [
-      'initialState' => [],
+      'initialData' => Database::getAdminData(),
     ]);
   });
 });

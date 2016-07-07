@@ -5,7 +5,7 @@ use Doctrine\DBAL\Connection;
 use OddSpot\Database\Entity\Question;
 use OddSpot\Database\Entity\QuestionChoice;
 use OddSpot\Database\Entity\Questionnaire;
-use OddSpot\Database\Entity\Weights;
+use OddSpot\Database\Entity\Weight;
 use Spot\MapperInterface;
 
 /**
@@ -43,7 +43,7 @@ class Database {
     self::$questionnaires = $spot->mapper(Questionnaire::class);
     self::$questions = $spot->mapper(Question::class);
     self::$question_choices = $spot->mapper(QuestionChoice::class);
-    self::$weights = $spot->mapper(Weights::class);
+    self::$weights = $spot->mapper(Weight::class);
   }
 
   public static function migrate() {
@@ -72,7 +72,7 @@ class Database {
 
   public static function getQuestionnaire() {
     $questionnaire = self::$questionnaires->all()
-      ->with(['questions', 'constants'])
+      ->with(['questions', 'weight'])
       ->where(['id' => 1])
       ->first();
 
@@ -80,8 +80,8 @@ class Database {
       'questionnaire' => [
         'global_function' => 'sqrt(x)',
         'constants' => [
-          'ak' => $questionnaire->constants->ak,
-          'bcc' => $questionnaire->constants->bcc,
+          'ak' => $questionnaire->weight->ak,
+          'bcc' => $questionnaire->weight->bcc,
         ],
         'questions' => [],
       ],
@@ -92,8 +92,8 @@ class Database {
         'order' => $question->order,
         'type' => $question->type,
         'weights' => [
-          'ak' => $question->weights->ak,
-          'bcc' => $question->weights->bcc,
+          'ak' => $question->weight->ak,
+          'bcc' => $question->weight->bcc,
         ],
         'question' => $question->question,
         'description' => $question->description,
@@ -123,6 +123,73 @@ class Database {
 
   public static function getClientInitialData() {
     return self::getQuestionnaire();
+  }
+
+  public static function saveAdminData($changes) {
+    if ($changes['questions']) {
+      foreach ($changes['questions'] as $id => $questionChanges) {
+        // Create or update
+        if ($id[0] === 'n') {
+          $question = self::$questions->build([
+            'questionnaire_id' => 1,
+          ]);
+        } else {
+          $question = self::$questions->all()
+            ->with(['weight'])
+            ->where(['id' => $id])
+            ->first();
+        }
+
+        self::updateQuestion($question, $questionChanges);
+      }
+    }
+
+    return [
+      'state' => 'success',
+    ];
+  }
+
+  private static function updateQuestion($question, $changes) {
+    foreach ($changes as $key => $val) {
+      switch ($key) {
+        case 'weights':
+          foreach ($val as $weightKey => $weightVal) {
+            $question->weight->set($weightKey, $weightVal);
+          }
+          self::$weights->save($question->weight);
+          break;
+
+        case 'settings':
+          foreach ($val as $settingKey => $settingVal) {
+            $question->set($settingKey, $settingVal);
+          }
+          break;
+
+        case 'choices':
+          foreach ($val as $id => $choiceChanges) {
+            // Create or update
+            if ($id[0] === 'n') {
+              $choice = self::$question_choices->build([
+                'question_id' => $question->id,
+              ]);
+            } else {
+              $choice = self::$question_choices->get($id);
+            }
+
+            foreach ($choiceChanges as $choiceKey => $choiceVal) {
+              $choice->set($choiceKey, $choiceVal);
+            }
+            self::$question_choices->save($choice);
+          }
+          break;
+
+        default:
+          $question->set($key, $val);
+          break;
+      }
+    }
+
+    self::$questions->save($question);
   }
 
 }
