@@ -7,6 +7,7 @@ import Question from '../components/Question.jsx';
 
 const mapStateToProps = ({ questionnaire }) => ({
   questions: questionnaire.questions,
+  totalQuestions: questionnaire.totalQuestions,
   currentQuestion: questionnaire.currentQuestion,
   answers: questionnaire.answers,
   completed: questionnaire.completed,
@@ -19,6 +20,7 @@ const mapDispatchToProps = {
 
 const propTypes = {
   questions: PropTypes.array,
+  totalQuestions: PropTypes.number,
   currentQuestion: PropTypes.number,
   answers: PropTypes.array,
   completed: PropTypes.bool,
@@ -51,7 +53,7 @@ class QuestionList extends Component {
       return styles.hiddenItem;
     }
 
-    if (questions[i].type === 'help') {
+    if (questions[i].type === 'message') {
       return styles.helpItem;
     }
 
@@ -59,13 +61,12 @@ class QuestionList extends Component {
   }
 
   render() {
-    const { questions, currentQuestion, answers, answerQuestion } = this.props;
-
-    const totalQuestions = questions.reduce(
-      (total, item) => (item.type === 'question') ? total + 1 : total, 0);
+    const { questions, totalQuestions, currentQuestion, answers, answerQuestion } = this.props;
 
     const items = questions.map((item, i) => {
-      if (item.type === 'question') {
+      if (item.type === 'message') {
+        return (<div className={styles.help}>{item.description}</div>);
+      } else {
         return (<Question
           {...item}
           value={answers[item.questionIndex]}
@@ -73,9 +74,6 @@ class QuestionList extends Component {
           totalQuestions={totalQuestions}
           onChange={(value) => answerQuestion({ question: i, value })}
         />);
-      }
-      if (item.type === 'help') {
-        return (<div className={styles.help}>{item.help}</div>);
       }
     })
 

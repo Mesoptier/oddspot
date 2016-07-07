@@ -14,14 +14,15 @@ const propTypes = {
   onChange: PropTypes.func,
 };
 
-function renderInput(type, { choices, value, inputPlaceholder, onChange }) {
+function renderInput(type, { choices, value, inputPlaceholder, onChange, settings }) {
   switch (type) {
-    case 'number':
+    case 'integer':
       return (
         <input
           className={styles.numberInput}
           type="number"
-          min="0"
+          min={settings.min}
+          max={settings.max}
           onKeyDown={(e) => {
             if (e.keyCode === 13 || e.keyCode === 9) {
               e.preventDefault();
@@ -34,7 +35,7 @@ function renderInput(type, { choices, value, inputPlaceholder, onChange }) {
         />
       );
 
-    default:
+    case 'multiple choice':
       return (
         <div className={styles.choiceGrid}>
           {choices.map((choice) => (
@@ -53,7 +54,7 @@ function renderInput(type, { choices, value, inputPlaceholder, onChange }) {
 }
 
 function Question(props) {
-  const { index, totalQuestions, question, questionType, description } = props;
+  const { index, totalQuestions, question, type, description } = props;
 
   return (
     <div className={styles.question}>
@@ -64,7 +65,7 @@ function Question(props) {
       ) : null}
 
       <div className={styles.inputContainer}>
-        {renderInput(questionType, props)}
+        {renderInput(type, props)}
       </div>
     </div>
   );
