@@ -3,9 +3,15 @@
 {% block title %}OddSpot - Admin{% endblock %}
 
 {% block content %}
-  <div id="root"></div>
+  <div id="react-app"></div>
+  <div id="react-popup"></div>
+{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{{ assetsBase }}/admin.css">
 {% endblock %}
 
 {% block scripts %}
+  <script>window.INITIAL_DATA = {{ initialData|json_encode()|raw }};</script>
   <script src="{{ assetsBase }}/admin.bundle.js"></script>
 {% endblock %}

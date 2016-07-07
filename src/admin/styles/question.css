@@ -1,0 +1,91 @@
+.constants,
+.questions {
+	background: #fff;
+}
+.constants {
+	padding: 2rem 4rem;
+}
+.questions > p:first-child,
+.answers > p:first-child {
+    padding: 1em 4rem;
+    border-bottom: 1px solid #eee;
+}
+.answers > p:first-child {
+    padding: 1em 0;
+}
+.constants,
+article.question {
+	border-bottom: 1px solid #eee;
+}
+.questions .deleted {
+	display: none;
+}
+
+h2:empty, h3:empty {
+	font-size: 0;
+}
+.questions h2:not(:empty) {
+	font-size: 1.6rem;
+}
+.questions h3:not(:empty) {
+	font-size: 1.3rem;
+}
+
+.questions .header {
+	padding-right: 4rem;
+	padding-left: 4rem;
+}
+.constants > h2:first-child {
+	/* Constants header */
+	padding: 0;
+	font-size: 1.8em;
+	margin-bottom: 0.75rem;
+}
+.questions .container {
+	margin: 0 4em;
+}
+.container .container {
+	margin: 0;
+}
+
+article.question > :first-child {
+	padding-top: 2rem;
+}
+article.question > :last-child {
+	padding-bottom: 3rem;
+}
+.questions {
+	padding-bottom: 1rem;
+}
+label.header {
+	display: block;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+	cursor: pointer;
+}
+.question-message .header {
+	background: #15BEC6;
+	color: #fff;
+}
+
+.hideAllBelow ~ *,
+.forceHide:checked ~ div article.question .container {
+	display: none!important;
+}
+
+article.question.orderable:not(.placeholder)[draggable="true"] {
+    margin-left: 0;
+    padding-left: 0;
+}
+article.question.orderable:not(.placeholder)[draggable="true"]:before {
+    left: 14px;
+    top: 50%;
+    bottom: auto;
+    margin-top: -.25em;
+}
+
+article.question hr {
+	margin: 2rem 0 0;
+	border: 0 solid #eee;
+	border-bottom-width: 1px;
+}

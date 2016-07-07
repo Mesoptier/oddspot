@@ -1,0 +1,61 @@
+.draggable-wrapper {
+    position: relative;
+}
+
+.orderable.icon-inside:before {
+    left: 90px;
+    top: calc(50% - 0.375em);
+}
+
+.orderable:not(.placeholder)[draggable="true"] {
+    margin-left: -36px;
+    padding-left: 36px;
+    position: relative;
+    cursor: ns-resize;
+}
+
+.orderable:not(.placeholder)[draggable="true"]:before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 1.2em;
+
+    width: 0.5em;
+    height: 0.125em;
+    left: 14px;
+    border-top: 0.375em double #999;
+    border-bottom: 0.125em solid #999;
+}
+
+.orderable.placeholder {
+    position: relative;
+    margin: -2px;
+    text-align: center;
+}
+.orderable.placeholder:after {
+    content: "";
+    display: block;
+    position: absolute;
+    box-sizing: border-box;
+    border-radius: 6px;
+    top: 0; right: 0; bottom: 0; left: 0;
+    border: 1px dashed #999;
+}
+.orderable.placeholder:before {
+    content: "drop here";
+    display: block;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    margin: -0.5em 0;
+    padding: 0 4em;
+    box-sizing: border-box;
+    text-align: center;
+    line-height: 1em;
+}
+.answers > .draggable-wrapper > .orderable.placeholder:after {
+    margin-top: 29px;
+}
+.answers > .draggable-wrapper > .orderable.placeholder:before {
+    padding-top: 14px;
+}

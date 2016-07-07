@@ -1,0 +1,30 @@
+html {
+	width: 100vw;
+	height: 100vh;
+}
+
+#react-popup .modal {
+	position: fixed;
+	z-index: 10;
+	bottom: 16px;
+	left: 16px;
+	max-width: calc(100% - 32px);
+	max-height: calc(100% - 32px);
+
+	background: rgba(0,0,0,0.9);
+	border-radius: 6px;
+	color: #ecf0f1;
+}
+
+#react-popup .modal p {
+	padding: 16px;
+	display: inline-block;
+}
+
+#react-popup .modal a {
+	display: inline-block;
+	color: #3498db;
+	float: right;
+	margin: 0 0 0 16px;
+	cursor: pointer;
+}
