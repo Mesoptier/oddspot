@@ -1,6 +1,5 @@
 # Project
-public/build
-*.local.php
+/public/assets/build/
 
 # JetBrains
 .idea
