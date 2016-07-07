@@ -4,6 +4,10 @@ namespace OddSpot\Command;
 use ConsoleKit\Command;
 use OddSpot\Database\Database;
 
+function randomFloat($min, $max) {
+  return (rand() / getrandmax() * ($max - $min) + $min);
+}
+
 class DatabaseCommand extends Command {
 
   public function execute(array $args, array $options = array()) {
@@ -34,6 +38,9 @@ class DatabaseCommand extends Command {
 
     $questions = [
       [
+        'order' => 0,
+        'type' => 'multiple choice',
+        'weights' => ['ak' => randomFloat(-3, 3), 'bcc' => randomFloat(-3, 3)],
         'question' => 'Are you male or female?',
         'choices' => [
           [ 'label' => 'Male', 'value' => 0 ],
@@ -41,6 +48,9 @@ class DatabaseCommand extends Command {
         ],
       ],
       [
+        'order' => 1,
+        'type' => 'multiple choice',
+        'weights' => ['ak' => randomFloat(-3, 3), 'bcc' => randomFloat(-3, 3)],
         'question' => 'Have you, during your leisure time and before the age of 65, frequently been exposed to sunlight?',
         'choices' => [
           [ 'label' => 'Yes', 'value' => 0 ],
@@ -49,6 +59,9 @@ class DatabaseCommand extends Command {
         ],
       ],
       [
+        'order' => 2,
+        'type' => 'multiple choice',
+        'weights' => ['ak' => randomFloat(-3, 3), 'bcc' => randomFloat(-3, 3)],
         'question' => 'Have you frequently been on a sun-vacation?',
         'description' => '(to tan)',
         'choices' => [
@@ -59,21 +72,54 @@ class DatabaseCommand extends Command {
           [ 'label' => 'Never', 'value' => 4 ],
         ],
       ],
+      [
+        'order' => 3,
+        'type' => 'message',
+        'description' => 'This is a message',
+      ],
+      [
+        'order' => 4,
+        'type' => 'integer',
+        'weights' => ['ak' => randomFloat(-3, 3), 'bcc' => randomFloat(-3, 3)],
+        'question' => 'What is your age?',
+        'description' => 'description',
+        'min' => 0,
+        'max' => 150,
+        'fnc' => 'sqrt(x)',
+      ]
     ];
 
     foreach ($questions as $question) {
+      $weights = null;
+
+      if (isset($question['weights'])) {
+        $weights = Database::$weights->create([
+          'ak' => $question['weights']['ak'],
+          'bcc' => $question['weights']['bcc'],
+        ]);
+      }
+
       $entity = Database::$questions->create([
         'questionnaire_id' => $questionnaire->id,
-        'question' => $question['question'],
+        'weights_id' => ($weights !== null) ? $weights->id : 0,
+        'order' => $question['order'],
+        'type' => $question['type'],
+        'question' => isset($question['question']) ? $question['question'] : null,
         'description' => isset($question['description']) ? $question['description'] : null,
+        'min' => isset($question['min']) ? $question['min'] : null,
+        'max' => isset($question['max']) ? $question['max'] : null,
+        'fnc' => isset($question['fnc']) ? $question['fnc'] : null,
       ]);
 
-      foreach ($question['choices'] as $choice) {
-        Database::$question_choices->create([
-          'question_id' => $entity->id,
-          'label' => $choice['label'],
-          'value' => $choice['value'],
-        ]);
+      if (isset($question['choices'])) {
+        foreach ($question['choices'] as $i => $choice) {
+          Database::$question_choices->create([
+            'question_id' => $entity->id,
+            'order' => $i,
+            'label' => $choice['label'],
+            'value' => $choice['value'],
+          ]);
+        }
       }
     }
   }
