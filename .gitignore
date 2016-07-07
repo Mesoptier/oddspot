@@ -1,5 +1,6 @@
 # Project
 public/build
+*.local.php
 
 # JetBrains
 .idea

@@ -1,0 +1,5 @@
+<?php
+/* This is an example file, make a copy without the ".dist" extension to use */
+return [
+  'username' => 'password',
+];

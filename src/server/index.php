@@ -31,6 +31,14 @@ $container['view'] = function ($container) {
 // Fancy error screen
 $app->add(new WhoopsMiddleware());
 
+// Authentication
+$app->add(new \Slim\Middleware\HttpBasicAuthentication([
+  'path' => '/admin',
+  'realm' => 'Admin',
+  'secure' => false, // We're not using HTTPS :(
+  'users' => include(DATA_DIRECTORY . '/users.local.php'),
+]));
+
 // Remove trailing slash
 $app->add(function (Request $request, Response $response, callable $next) {
   $uri = $request->getUri();
@@ -47,9 +55,6 @@ $app->add(function (Request $request, Response $response, callable $next) {
 
 // Admin routes
 $app->group('/admin', function () {
-
-  // TODO: Add authentication
-
   $this->get('/api/questionnaire', function (Request $request, Response $response) {
     return $response->withJson(Database::getAdminData());
   });
