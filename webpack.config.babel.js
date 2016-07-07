@@ -1,4 +1,5 @@
 import autoprefixer from 'autoprefixer';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 const baseConfig = {
   entry: {
@@ -13,7 +14,9 @@ const baseConfig = {
 
   devtool: 'source-map',
 
-  plugins: [],
+  plugins: [
+    new ExtractTextPlugin('[name].css'),
+  ],
 
   module: {
     loaders: [
@@ -32,12 +35,18 @@ const baseConfig = {
       },
       {
         test: /\.scss$/,
-        loaders: [
-          'style',
+        loaders: ExtractTextPlugin.extract('style', [
           'css?modules&localIdentName=[name]--[local]--[hash:base64:5]',
           'postcss',
           'sass',
-        ],
+        ]),
+      },
+      {
+        test: /\.css$/,
+        loaders: ExtractTextPlugin.extract('style', [
+          'css',
+          'postcss',
+        ]),
       }
     ],
   },

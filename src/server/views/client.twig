@@ -6,6 +6,10 @@
   <div id="root"></div>
 {% endblock %}
 
+{% block styles %}
+  <link rel="stylesheet" href="{{ assetsBase }}/client.css">
+{% endblock %}
+
 {% block scripts %}
   <script>window.INITIAL_DATA = {{ initialData|json_encode()|raw }};</script>
   <script src="{{ assetsBase }}/client.bundle.js"></script>
