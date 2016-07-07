@@ -5,6 +5,7 @@ use Doctrine\DBAL\Connection;
 use OddSpot\Database\Entity\Question;
 use OddSpot\Database\Entity\QuestionChoice;
 use OddSpot\Database\Entity\Questionnaire;
+use OddSpot\Database\Entity\Weights;
 use Spot\MapperInterface;
 
 /**
@@ -25,6 +26,9 @@ class Database {
   /* @var MapperInterface */
   public static $question_choices;
 
+  /* @var MapperInterface */
+  public static $weights;
+
   /**
    * @param $dsn string|array
    * @throws \Spot\Exception
@@ -39,12 +43,14 @@ class Database {
     self::$questionnaires = $spot->mapper(Questionnaire::class);
     self::$questions = $spot->mapper(Question::class);
     self::$question_choices = $spot->mapper(QuestionChoice::class);
+    self::$weights = $spot->mapper(Weights::class);
   }
 
   public static function migrate() {
     self::$questionnaires->migrate();
     self::$questions->migrate();
     self::$question_choices->migrate();
+    self::$weights->migrate();
   }
 
   /**
@@ -64,34 +70,59 @@ class Database {
     self::migrate();
   }
 
-  public static function getClientInitialData() {
+  public static function getQuestionnaire() {
     $questionnaire = self::$questionnaires->all()
-      ->with(['questions'])
+      ->with(['questions', 'constants'])
       ->where(['id' => 1])
       ->first();
 
-    $state = [
+    $data = [
       'questionnaire' => [
+        'global_function' => 'sqrt(x)',
+        'constants' => [
+          'ak' => $questionnaire->constants->ak,
+          'bcc' => $questionnaire->constants->bcc,
+        ],
         'questions' => [],
       ],
     ];
 
     foreach ($questionnaire->questions as $i => $question) {
-      $state['questionnaire']['questions'][$i] = [
+      $data['questionnaire']['questions'][$question->id] = [
+        'order' => $question->order,
+        'type' => $question->type,
+        'weights' => [
+          'ak' => $question->weights->ak,
+          'bcc' => $question->weights->bcc,
+        ],
         'question' => $question->question,
         'description' => $question->description,
         'choices' => [],
+        'settings' => [
+          'min' => $question->max,
+          'max' => $question->min,
+          'fnc' => $question->fnc,
+        ],
       ];
 
       foreach ($question->choices as $choice) {
-        $state['questionnaire']['questions'][$i]['choices'][] = [
+        $data['questionnaire']['questions'][$question->id]['choices'][$choice->id] = [
           'label' => $choice->label,
           'value' => $choice->value,
+          'order' => $choice->order,
         ];
       }
     }
 
-    return $state;
+    return $data;
+  }
+
+  public static function getAdminData() {
+    return self::getQuestionnaire();
+  }
+
+  public static function getClientInitialData() {
+    return self::getQuestionnaire();
   }
 
 }

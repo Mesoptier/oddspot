@@ -22,8 +22,14 @@ class DatabaseCommand extends Command {
   private function seed() {
     Database::rebuild();
 
+    $constants = Database::$weights->create([
+      'ak' => -3.294,
+      'bcc' => -13.16
+    ]);
+
     $questionnaire = Database::$questionnaires->create([
       'name' => 'OddSpot',
+      'weights_id' => $constants->id,
     ]);
 
     $questions = [

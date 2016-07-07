@@ -49,6 +49,9 @@ $app->add(function (Request $request, Response $response, callable $next) {
 $app->group('/admin', function () {
 
   // TODO: Add authentication
+  $this->get('/api', function (Request $request, Response $response) {
+    return $response->withJson(Database::getAdminData());
+  });
 
   $this->get('[/{path:.*}]', function (Request $request, Response $response) {
     $this->view->render($response, 'admin.twig', [

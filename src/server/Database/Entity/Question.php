@@ -13,8 +13,14 @@ class Question extends Entity {
     return [
       'id' => ['type' => 'integer', 'primary' => true, 'autoincrement' => true],
       'questionnaire_id' => ['type' => 'integer', 'required' => true],
-      'question' => ['type' => 'text', 'required' => true],
+      'weights_id' => ['type' => 'integer'],
+      'type' => ['type' => 'string', 'required' => true, 'value' => 'none'],
+      'order' => ['type' => 'integer', 'required' => true, 'value' => 0],
+      'question' => ['type' => 'text'],
       'description' => ['type' => 'text'],
+      'min' => ['type' => 'integer'],
+      'max' => ['type' => 'integer'],
+      'fnc' => ['type' => 'string'],
     ];
   }
 
@@ -22,6 +28,7 @@ class Question extends Entity {
     return [
       'questionnaire' => $mapper->belongsTo($entity, Questionnaire::class, 'questionnaire_id'),
       'choices' => $mapper->hasMany($entity, QuestionChoice::class, 'question_id'),
+      'weights' => $mapper->belongsTo($entity, Weights::class, 'weights_id'),
     ];
   }
 
