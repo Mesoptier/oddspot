@@ -51,7 +51,6 @@ class Results extends Component {
 
     return (
       <Container>
-        <div className={styles.dummy}>Maakt&nbsp;u&nbsp;zich&nbsp;geen&nbsp;zorgen, dit&nbsp;zijn&nbsp;slechts&nbsp;proef&nbsp;resultaten!</div>
         {
           Object.keys(results)
             .sort((key1, key2) => results[key2].score - results[key1].score)
