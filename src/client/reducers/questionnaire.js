@@ -4,19 +4,51 @@ import { createAction, handleActions } from 'redux-actions';
 const SET_QUESTIONNAIRE = 'questionnaire/SET_QUESTIONNAIRE';
 const SET_CURRENT_QUESTION = 'questionnaire/SET_CURRENT_QUESTION';
 const ANSWER_QUESTION = 'questionnaire/ANSWER_QUESTION';
+const CALCULATE_RESULTS = 'questionnaire/CALCULATE_RESULTS';
 
 export const setQuestionnaire = createAction(SET_QUESTIONNAIRE);
 export const setCurrentQuestion = createAction(SET_CURRENT_QUESTION);
 export const answerQuestion = createAction(ANSWER_QUESTION);
+export const calculateResults = createAction(CALCULATE_RESULTS);
 
 // Initial state
 const initialState = {
+  globalFunction: null,
+  constants: {},
   questions: [],
   answers: [],
   totalQuestions: 0,
   currentQuestion: 0,
   completed: false,
 };
+
+// Utilities
+const functionMap = {
+  'sqrt': 'Math.sqrt',
+  'pow': 'Math.pow',
+  'abs': 'Math.abs',
+};
+
+const functionRegex = new RegExp(Object.keys(functionMap).join('|'), 'gi');
+
+function parseFormula(formula) {
+  const preparedFormula = formula
+    .replace(/\$([a-zA-Z0-9_]+)/g, 'variables[\'$1\']')
+    .replace(functionRegex, (name) => functionMap[name]);
+
+  return new Function('variables', `return ${preparedFormula};`);
+}
+
+function applyHeuristic(heuristic, score) {
+  return parseFormula(heuristic)({ x: score });
+}
+
+function createDescription(score, name) {
+  let description = `Op een schaal van 0 tot 100, waarbij 0 betekent dat u niet in gevaar bent voor
+    ${name}, <strong>scoort u een ${Math.round(score * 100)}.</strong>`;
+
+  return description;
+}
 
 // Reducers
 export default handleActions({
@@ -45,6 +77,8 @@ export default handleActions({
       ...state,
       questions,
       totalQuestions,
+      constants: payload.constants,
+      globalFunction: payload.global_function,
     };
   },
 
@@ -90,6 +124,47 @@ export default handleActions({
       answers,
       currentQuestion,
       completed,
+    };
+  },
+
+  [CALCULATE_RESULTS]: (state, { payload }) => {
+    const results = {};
+
+    ['ak', 'bcc'].forEach((type) => {
+      let score = state.answers.reduce((score, answer, questionIndex) => {
+        const question = state.questions.find((question) => question.questionIndex === questionIndex);
+        const weight = question.weights[type];
+        const { fnc } = question.settings;
+
+        let localScore = answer;
+
+        if (fnc) {
+          localScore = applyHeuristic(fnc, localScore);
+        }
+
+        return score + (localScore * weight);
+      }, 0);
+
+      if (state.globalFunction) {
+        score = applyHeuristic(state.globalFunction, score);
+      }
+
+      const name = (type === 'ak')
+        ? 'Actinische Keratose'
+        : 'Basaalcelcarcinoom';
+
+      const description = createDescription(score, name);
+
+      results[type] = {
+        score,
+        name,
+        description,
+      };
+    });
+
+    return {
+      ...state,
+      results,
     };
   },
 
