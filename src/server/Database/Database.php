@@ -78,7 +78,7 @@ class Database {
 
     $data = [
       'questionnaire' => [
-        'global_function' => 'sqrt(x)',
+        'global_function' => $questionnaire->global_function,
         'constants' => [
           'ak' => $questionnaire->weight->ak,
           'bcc' => $questionnaire->weight->bcc,

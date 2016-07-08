@@ -14,6 +14,7 @@ class Questionnaire extends Entity {
       'id' => ['type' => 'integer', 'primary' => true, 'autoincrement' => true],
       'weight_id' => ['type' => 'integer', 'required' => false, 'value' => null],
       'name' => ['type' => 'string', 'required' => true],
+      'global_function' => ['type' => 'string', 'required' => false, 'value' => null],
     ];
   }
 

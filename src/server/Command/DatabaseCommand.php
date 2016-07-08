@@ -34,6 +34,7 @@ class DatabaseCommand extends Command {
     $questionnaire = Database::$questionnaires->create([
       'name' => 'OddSpot',
       'weight_id' => $weight->id,
+      'global_function' => 'sqrt($x)',
     ]);
 
     $questions = [
@@ -85,7 +86,7 @@ class DatabaseCommand extends Command {
         'description' => 'description',
         'min' => 0,
         'max' => 150,
-        'fnc' => 'sqrt(x)',
+        'fnc' => 'sqrt($x)',
       ]
     ];
 
