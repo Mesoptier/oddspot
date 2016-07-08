@@ -30,6 +30,7 @@ const baseConfig = {
           ],
           plugins: [
             'transform-object-rest-spread',
+            'react-hot-loader/babel',
           ],
         },
       },
