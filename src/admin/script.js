@@ -343,8 +343,8 @@ var dictionary = {
       nl: "max"
     },
     heuristic: {
-      en: "heuristic function (over x)",
-      nl: "heuristische functie (over x)"
+      en: "heuristic function (over $x)",
+      nl: "heuristische functie (over $x)"
     }
   },
   description: {
@@ -713,7 +713,7 @@ var Question = React.createClass({ // Seems to work okay ?
                                             settings: q.settings || {
                                                 min: 0,
                                                 max: 100,
-                                                fnc: "sqrt(x)"
+                                                fnc: "sqrt($x)"
                                             }
                                         }
                                     }[type]}
