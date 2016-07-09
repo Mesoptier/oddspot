@@ -24,9 +24,13 @@ const initialState = {
 
 // Utilities
 const functionMap = {
-  'sqrt': 'functions.sqrt',
-  'pow': 'Math.pow',
-  'abs': 'Math.abs',
+  'sqrt': 'functions.sqrt', // √x
+  'pow': 'Math.pow', // x^n
+  'abs': 'Math.abs', // |x|
+  'exp': 'Math.exp', // e^x
+  'ln': 'Math.log',
+  'log10': 'Math.log10',
+  'log2': 'Math.log2',
 };
 
 const functions = {

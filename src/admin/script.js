@@ -343,8 +343,8 @@ var dictionary = {
       nl: "max"
     },
     heuristic: {
-      en: "heuristic function (over $x)",
-      nl: "heuristische functie (over $x)"
+      en: "heuristic function (over $x)<br><pre><small>Functions: sqrt($x) = √x, pow($x, 5) = x^5, abs($x) = |x|, exp($x) = e^x, ln($x), log10($x), log2($x)</small></pre>",
+      nl: "heuristische functie (over $x)<br><pre><small>Functies: sqrt($x) = √x, pow($x, 5) = x^5, abs($x) = |x|, exp($x) = e^x, ln($x), log10($x), log2($x)</small></pre>"
     }
   },
   description: {
@@ -1303,7 +1303,7 @@ var Input = React.createClass({
 
     return (
       <label className={"smartInput " + classnames.join(" ")}>
-        <p>{p.label}</p>
+        <p dangerouslySetInnerHTML={{ __html: p.label }} />
         <input
           title={type}
           type={inputType}

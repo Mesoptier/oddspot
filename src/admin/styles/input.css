@@ -132,3 +132,10 @@ label:not(.full) + label:not(.full),
 label:not(.full) + input {
   margin-left: 0.2em;
 }
+
+.smartInput pre {
+  font-family: monospace;
+}
+.smartInput small {
+  font-size: 0.9em;
+}
