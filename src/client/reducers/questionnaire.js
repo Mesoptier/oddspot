@@ -154,9 +154,20 @@ export default handleActions({
         : 'Basaalcelcarcinoom';
 
       const description = createDescription(score, name);
+      
+      let level;
+      
+      if (score <= 0.2) {
+        level = 'normal';
+      } else if ((type === 'ak' && score <= 0.75) || (type === 'bcc' && score <= 0.8)){
+        level = 'warning';
+      } else {
+        level = 'danger';
+      }
 
       results[type] = {
         score,
+        level,
         name,
         description,
       };

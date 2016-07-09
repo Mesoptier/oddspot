@@ -7,16 +7,16 @@ const propTypes = {
   description: PropTypes.string,
 };
 
-function headingClassName(score) {
-  if (score < 0.4) return styles.primaryHeading;
-  if (score < 0.8) return styles.warningHeading;
-  return styles.dangerHeading;
+function headingClassName(level) {
+  if (level === 'normal') return styles.primaryHeading;
+  if (level === 'warning') return styles.warningHeading;
+  return styles.dangerHeading; // level === 'danger'
 }
 
-function ResultBox({ score, name, description }) {
+function ResultBox({ score, level, name, description }) {
   return (
     <div className={styles.box}>
-      <div className={headingClassName(score)}>
+      <div className={headingClassName(level)}>
         <div className={styles.name}>{name}</div>
         <div className={styles.score}>{Math.round(score * 100)}%</div>
       </div>
