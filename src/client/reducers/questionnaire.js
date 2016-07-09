@@ -43,9 +43,23 @@ function applyHeuristic(heuristic, score) {
   return parseFormula(heuristic)({ x: score });
 }
 
-function createDescription(score, name) {
+function createDescription(score, level, name) {
   let description = `Op een schaal van 0 tot 100, waarbij 0 betekent dat u niet in gevaar bent voor
     ${name}, <strong>scoort u een ${Math.round(score * 100)}.</strong>`;
+
+  switch (level) {
+    case 'normal':
+      description += ` Dat houdt in dat het niet erg waarschijnlijk is dat u ${name} heeft.`;
+      break;
+
+    case 'warning':
+      description += ` Vandaar dat op dit punt het bewijs voor ${name} niet overtuigend is (noch sterk negatief, noch positief).`;
+      break;
+
+    case 'danger':
+      description += ` Dat betekent dat u waarschijnlijk ${name} heeft. <strong>Ga hiermee naar uw huisarts!</strong>`;
+      break;
+  }
 
   return description;
 }
@@ -149,14 +163,8 @@ export default handleActions({
         score = applyHeuristic(state.globalFunction, score);
       }
 
-      const name = (type === 'ak')
-        ? 'Actinische Keratose'
-        : 'Basaalcelcarcinoom';
-
-      const description = createDescription(score, name);
-      
       let level;
-      
+
       if (score <= 0.2) {
         level = 'normal';
       } else if ((type === 'ak' && score <= 0.75) || (type === 'bcc' && score <= 0.8)){
@@ -164,6 +172,12 @@ export default handleActions({
       } else {
         level = 'danger';
       }
+
+      const name = (type === 'ak')
+        ? 'Actinische Keratose'
+        : 'Basaalcelcarcinoom';
+
+      const description = createDescription(score, level, name);
 
       results[type] = {
         score,
