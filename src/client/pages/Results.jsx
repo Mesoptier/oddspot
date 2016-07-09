@@ -9,22 +9,6 @@ import { calculateResults } from '../reducers/questionnaire';
 
 const mapStateToProps = ({ questionnaire }) => ({
   results: questionnaire.results,
-  // results: {
-  //   ak: {
-  //     score: 0.5,
-  //     name: 'Basaalcelcarcinoom',
-  //     description: 'Op een schaal van 0 tot 100, waarbij 0 betekent dat u niet in gevaar bent ' +
-  //       'voor basaal&shy;cel&shy;carcinoom, <strong>scoort u een 50</strong>. Vandaar dat op ' +
-  //       'dit punt het bewijs niet overtuigend is (noch sterk negatief, noch positief).',
-  //   },
-  //   bcc: {
-  //     score: 0.1,
-  //     name: 'Actinische Keratose',
-  //     description: 'Op een schaal van 0 tot 100, waarbij 0 betekent dat u niet in gevaar bent ' +
-  //       'voor actinische keratose, <strong>scoort u een 10</strong>. Dat houdt in dat het ' +
-  //       'niet erg waarschijnlijk is dat u actinische keratose heeft.',
-  //   },
-  // },
 });
 
 const mapDispatchToProps = {
