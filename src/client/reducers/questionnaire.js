@@ -24,9 +24,15 @@ const initialState = {
 
 // Utilities
 const functionMap = {
-  'sqrt': 'Math.sqrt',
+  'sqrt': 'functions.sqrt',
   'pow': 'Math.pow',
   'abs': 'Math.abs',
+};
+
+const functions = {
+  sqrt(x) {
+    return Math.sqrt(Math.max(x, 0));
+  },
 };
 
 const functionRegex = new RegExp(Object.keys(functionMap).join('|'), 'gi');
@@ -36,11 +42,11 @@ function parseFormula(formula) {
     .replace(/\$([a-zA-Z0-9_]+)/g, 'variables[\'$1\']')
     .replace(functionRegex, (name) => functionMap[name]);
 
-  return new Function('variables', `return ${preparedFormula};`);
+  return new Function('variables', 'functions', `return ${preparedFormula};`);
 }
 
 function applyHeuristic(heuristic, score) {
-  return parseFormula(heuristic)({ x: score });
+  return parseFormula(heuristic)({ x: score }, functions);
 }
 
 function createDescription(score, level, name) {
