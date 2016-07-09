@@ -1,48 +1,48 @@
 body {
-	background: rgb(241, 241, 241);
-	font-family: Arial;
+  background: rgb(241, 241, 241);
+  font-family: Arial;
 
-	padding: calc(72px + 32px) calc(50vw - 480px);
-	width: auto;
-	height: auto;
+  padding: calc(72px + 32px) calc(50vw - 480px);
+  width: auto;
+  height: auto;
 }
 
 #header {
-	position: fixed;
-	z-index: 1;
-	top: 0; left: 0;
-	background: #fff;
+  position: fixed;
+  z-index: 1;
+  top: 0; left: 0;
+  background: #fff;
 
-	padding: calc(36px - 0.5em) calc(50vw - 480px + 4rem);
-	box-sizing: border-box;
+  padding: calc(36px - 0.5em) calc(50vw - 480px + 4rem);
+  box-sizing: border-box;
 }
 #header > h1 {
-	display: inline-block;
-	font-size: 2.2em;
+  display: inline-block;
+  font-size: 2.2em;
 }
 
 #header .right {
-	display: inline-block;
-	float: right;
+  display: inline-block;
+  float: right;
 }
 
 #header a {
-	display: inline-block;
-	color: #3498db;
-	margin: 0 6px;
-	cursor: pointer;
-	line-height: 2.2em;
-	height: 100%;
+  display: inline-block;
+  color: #3498db;
+  margin: 0 6px;
+  cursor: pointer;
+  line-height: 2.2em;
+  height: 100%;
 }
 
 section[name=questionnaire] {
-	background: #ecf0f1;
+  background: #ecf0f1;
 }
 
 #header,
 section[name=questionnaire] {
-	width: 100%;
+  width: 100%;
 
-	color: rgb(51, 51, 51);
-    box-shadow: rgba(0, 0, 0, 0.298039) 0px 0px 5px;
+  color: rgb(51, 51, 51);
+  box-shadow: rgba(0, 0, 0, 0.298039) 0px 0px 5px;
 }

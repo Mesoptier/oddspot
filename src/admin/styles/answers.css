@@ -1,16 +1,16 @@
 div.answers .small {
-	width: 100px;
+  width: 100px;
 }
 div.answers .large {
-	width: calc(100% - 240px - .4em);
+  width: calc(100% - 240px - .4em);
 }
 div.answers .answer [type=button] {
-	width: 140px;
+  width: 140px;
 }
 
 div.answers :last-child {
-	margin-right: 0;
+  margin-right: 0;
 }
 div.answers .deleted {
-	display: none;
+  display: none;
 }

@@ -3,6 +3,7 @@ const ReactDOM = require('react-dom');
 
 const questionnaire = window.INITIAL_DATA.questionnaire;
 
+var glb;
 
 /* ===== FROM cache.js ===== */
 
@@ -404,8 +405,26 @@ var dictionary = {
   },
   save: {
     en: "save changes",
-    nl: "wijzigingen opslaan"
+    nl: "wijzigingen opslaan",
+
+    progress: {
+      en: "saving...",
+      nl: "aan het opslaan..."
+    },
+    success: {
+      en: "saved successfully",
+      nl: "succesvol opgeslagen"
+    },
+    error: {
+      en: "error while saving",
+      nl: "een fout is opgetreden tijdens het opslaan"
+    },
+    canceled: {
+      en: "saving canceled",
+      nl: "opslaan geannuleerd"
+    }
   }
+
 }
 
 function l(path) {
@@ -450,11 +469,25 @@ var Questionnaire = React.createClass({
   },
   saveQuestionnaire: function () {
     var datastring = JSON.stringify(this.state.changes);
-    var url = "";
+    var url = window.API_BASE_URL + "/questionnaire/save";
 
-    Popup.set("This feature is not implemented yet");
+    Popup.set(l("save progress"), undefined, "wait");
 
     // TODO: XML request?
+    var xhr = new XMLHttpRequest();
+    xhr.addEventListener("load", () => {
+      Popup.set(l("save success"), {showFor: 4000});
+    });
+    xhr.addEventListener("error", () => {
+      Popup.set(l("save error"), {showFor: 4000});
+    });
+    xhr.addEventListener("abort", () => {
+      Popup.set(l("save cancel"), {showFor: 4000});
+    });
+
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.send(datastring);
   },
   permeateChanges: function (id, data) {
     var s = this.state;
@@ -577,8 +610,15 @@ var Question = React.createClass({ // Seems to work okay ?
     } else {
       Popup.set(
         Strings.capitalizeFirst(l("deleted question")),
-        this.undoDelete,
-        this.deleteThis
+        {
+          showFor: 12000,
+          actionables: [
+            {label:l("undo"), fnc: this.undoDelete},
+            {label:l("dismiss"), fnc: this.deleteThis}
+          ],
+          onTimeout: this.deleteThis,
+          onOverride: this.deleteThis
+        }
       );
       this.permeateChanges("deleted", "pending");
     }
@@ -719,8 +759,15 @@ var Answer = React.createClass({
     } else {
       Popup.set(
         Strings.capitalizeFirst(l("deleted answer")),
-        this.undoDelete,
-        this.deleteThis
+        {
+          showFor: 12000,
+          actionables: [
+            {label:l("undo"), fnc: this.undoDelete},
+            {label:l("dismiss"), fnc: this.deleteThis}
+          ],
+          onTimeout: this.deleteThis,
+          onOverride: this.deleteThis
+        }
       );
       this.permeateChanges("deleted", "pending");
     }
@@ -1246,13 +1293,24 @@ var Input = React.createClass({
       ? Arrays.unique(p.className.split(" ").concat(s.classnames))
       : s.classnames;
 
+    const attrs = {};
+
+    if (type === 'float') {
+      attrs.step = '0.01';
+    } else if (type === 'integer') {
+      attrs.step = '1';
+    }
+
     return (
       <label className={"smartInput " + classnames.join(" ")}>
         <p>{p.label}</p>
-        <input title={type}
-               type={inputType}
-               value={s.display}
-               onChange={this.validate} />
+        <input
+          title={type}
+          type={inputType}
+          value={s.display}
+          onChange={this.validate}
+          {...attrs}
+        />
 
         <p className="error">{s.errors.join(
           <br />
@@ -1261,85 +1319,108 @@ var Input = React.createClass({
     );
   }
 });
+
+
+var Popup; // babel-global object for instantiating modal popups
 var Modal = React.createClass({
   getInitialState: function () {
     return {
       message: "",
-      undo: x=>x,
-      showUntil: 0,
-      dismiss: x=>x
+      type: "none"
     }
   },
   componentDidMount: function () {
-    Popup = {
-      set: this.showModal,
-      forceUpdate: this.forceUpdate
-    }
+    Popup = {set: this.set}
   },
   componentWillUnmount: function () {
-    clearTimeout(this.timer);
     Popup = undefined;
   },
-  update: function () {
-    var now = +new Date();
+  set: function (message, options, type) {
+    if ("options" in this.state)
+      if ("onOverride" in this.state.options)
+        if (typeof this.state.options.onOverride === "function")
+          this.state.options.onOverride();
+    this.dismiss();
 
-    if (now > this.state.showUntil) {
-      this.state.dismiss();
+    // initiate new modal
+    var state = this.getInitialState();
+    state.message = message || "";
+    delete state.type;
 
-      delete this.timer;
-      this.forceUpdate();
+    if (typeof options === "object") state.options = options;
+    if (typeof type === "string") state.type = type;
+
+    // timed interactions
+    if (typeof options !== "undefined") {
+      if ("showUntil" in options || "showFor" in options) {
+        var duration = "showUntil" in options
+          ? options.showUntil - +new Date()
+          : options.showFor;
+
+        if (duration > 0) {
+          state.timer = setTimeout(() => {
+            if ("onTimeout" in options)
+              if (typeof options.onTimeout === "function")
+                options.onTimeout();
+            this.dismiss();
+          }, duration);
+        } else {
+          // don't display a modal
+          this.setState(this.getInitialState());
+          return;
+        }
+      }
     }
+
+    this.replaceState(state);
   },
-  showModal: function (message, undo, dismiss) {
-    var s = {};
-    var current = +new Date();
-    var addTime = 15*1000 - 100;
+  dismiss: function () {
+    var t = this,
+      s = t.state,
+      o = s.options || {};
 
-    if ("timer" in this) {
-      clearTimeout(this.timer);
-      this.state.dismiss();
-    }
+    if ("timer" in s) clearTimeout(s.timer);
+    if ("onEnd" in o && typeof o.onEnd === "function") o.onEnd();
 
-    s.showUntil = current + addTime;
-    s.message = message;
-    s.undo = undo;
-    s.dismiss = dismiss;
-    this.timer = setTimeout(this.update, addTime + 100);
-
-    this.setState(s);
-  },
-  dismissModal: function (skipTimeout) {
-    // -1 to ensure difference at next lookup
-    this.setState({showUntil: +new Date()-1});
-    clearTimeout(this.timer);
-    delete this.timer;
-
-    if (typeof skipTimeout === "boolean" ? !skipTimeout : true)
-      if (typeof this.state.dismiss === "function")
-        this.state.dismiss();
+    this.replaceState(this.getInitialState());
   },
   render: function () {
-    var p = this.props,
-      s = this.state;
+    var t = this,
+      p = t.props,
+      s = t.state,
+      o = s.options || {};
 
-    if (+new Date() > s.showUntil) return null;
-    return (
+    return s.type === "none" ? null : (
       <div className={p.className}>
-        <p>{s.message}
+        <p>
+          {s.message}
+          {typeof o === "object" && "actionables" in o
+            ? o.actionables.map(action =>
+            <a  key={action.label}
+                onClick={() => {
+                                                if ("onAction" in o && typeof o.onAction === "function")
+                                                    o.onAction();
 
-          <a key="dismiss" onClick={this.dismissModal}>{l("dismiss").toUpperCase()}</a>
-          {s.undo ?
-            <a key="undo" onClick={() => {
-                                    this.dismissModal(true);
-                                    s.undo();
-                                }}>{l("undo").toUpperCase()}</a> : ""}
+                                                if (typeof action.fnc === "function")
+                                                    action.fnc();
+
+                                                this.dismiss();
+                                            }}>
+
+              {action.label.toUpperCase()}
+            </a>) : null}
+
+          {"type" in s && s.type === "wait" ?
+            <span className="spinner">
+                                        <span className="double-bounce1" />
+                                        <span className="double-bounce2" />
+                                    </span> : ""}
+
         </p>
       </div>
     )
   }
 });
-
-var Popup; // babel-global object for instantiating modal popups
 
 // Render
 ReactDOM.render(

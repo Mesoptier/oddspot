@@ -12,6 +12,9 @@
 {% endblock %}
 
 {% block scripts %}
-  <script>window.INITIAL_DATA = {{ initialData|json_encode()|raw }};</script>
+  <script>
+    window.INITIAL_DATA = {{ initialData|json_encode()|raw }};
+    window.API_BASE_URL = {{ apiBaseUrl|json_encode()|raw }};
+  </script>
   <script src="{{ assetsBase }}/admin.bundle.js"></script>
 {% endblock %}

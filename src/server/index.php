@@ -55,18 +55,27 @@ $app->add(function (Request $request, Response $response, callable $next) {
 
 // Admin routes
 $app->group('/admin', function () {
-  $this->get('/api/questionnaire', function (Request $request, Response $response) {
-    return $response->withJson(Database::getAdminData());
-  });
+  $this->group('/api', function () {
+    $this->get('/questionnaire', function (Request $request, Response $response) {
+      return $response->withJson(Database::getAdminData());
+    });
 
-  $this->post('/api/questionnaire/save', function (Request $request, Response $response) {
-    $data = $request->getParsedBody();
-    return $response->withJson(Database::saveAdminData($data['changes']));
+    $this->post('/questionnaire/save', function (Request $request, Response $response) {
+      $data = $request->getParsedBody();
+      return $response->withJson(Database::saveAdminData($data));
+    });
+
+    $this->get('[/{path:.*}]', function (Request $request, Response $response) {
+      return $response
+        ->withJson(['status' => 'error', 'error' => 'unknown method'])
+        ->withStatus(501);
+    })->setName('api');
   });
 
   $this->get('[/{path:.*}]', function (Request $request, Response $response) {
     $this->view->render($response, 'admin.twig', [
       'initialData' => Database::getAdminData(),
+      'apiBaseUrl' => $this->router->pathFor('api'),
     ]);
   });
 });
